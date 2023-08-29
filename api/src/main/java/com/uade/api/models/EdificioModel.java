@@ -17,11 +17,11 @@ public class EdificioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEdificio;
     private String direccion;
-    @OneToMany
+    @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
     private List<UnidadModel> unidades;
-    @OneToMany
+    @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
     private List<EspacioComun> espaciosComunes;
     public boolean soyEseEdificio(int id){
-        return false;
+        return this.idEdificio==id;
     }
 }

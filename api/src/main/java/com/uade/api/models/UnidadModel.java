@@ -20,5 +20,8 @@ public class UnidadModel {
     private UsuarioModel duenio;
     @OneToOne
     private UsuarioModel inquilino;
+    @ManyToOne
+    @JoinColumn(name = "Edificio_Id")
+    private EdificioModel edificio;
 
 }
