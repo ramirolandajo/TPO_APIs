@@ -1,4 +1,4 @@
-package com.uade.api.models;
+package com.uade.api.models.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ public class EdificioModel {
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
     private List<UnidadModel> unidades;
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
-    private List<EspacioComun> espaciosComunes;
+    private List<EspacioComunModel> espaciosComunes;
     public boolean soyEseEdificio(int id){
         return this.idEdificio==id;
     }

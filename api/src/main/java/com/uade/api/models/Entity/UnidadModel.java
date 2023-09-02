@@ -1,4 +1,4 @@
-package com.uade.api.models;
+package com.uade.api.models.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,5 +23,4 @@ public class UnidadModel {
     @ManyToOne
     @JoinColumn(name = "Edificio_Id")
     private EdificioModel edificio;
-
 }

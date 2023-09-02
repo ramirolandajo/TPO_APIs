@@ -1,4 +1,4 @@
-package com.uade.api.models;
+package com.uade.api.models.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ public class UsuarioModel {
     private Long idUsuario;
     private String usuario;
     private String password;
-    private int cuil;
+    private String cuil;
     private String nombreCompleto;
     private TipoUsuario tipoUsuario;
 }
