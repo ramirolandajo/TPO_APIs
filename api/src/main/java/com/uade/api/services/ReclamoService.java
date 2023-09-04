@@ -1,7 +1,7 @@
 package com.uade.api.services;
 
-import com.uade.api.models.DAO.IReclamoModelDAO;
-import com.uade.api.models.Entity.ReclamoModel;
+import com.uade.api.dao.IReclamoModelDAO;
+import com.uade.api.models.ReclamoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

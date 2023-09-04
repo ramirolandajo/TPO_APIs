@@ -1,6 +1,6 @@
-package com.uade.api.models.DAO;
+package com.uade.api.dao;
 
-import com.uade.api.models.Entity.UsuarioModel;
+import com.uade.api.models.UsuarioModel;
 
 import java.util.List;
 

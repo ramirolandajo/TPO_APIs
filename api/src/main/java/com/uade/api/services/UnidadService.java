@@ -1,7 +1,7 @@
 package com.uade.api.services;
 
-import com.uade.api.models.DAO.IUnidadModelDAO;
-import com.uade.api.models.Entity.UnidadModel;
+import com.uade.api.dao.IUnidadModelDAO;
+import com.uade.api.models.UnidadModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

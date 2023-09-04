@@ -1,6 +1,6 @@
 package com.uade.api.services;
 
-import com.uade.api.models.Entity.EdificioModel;
+import com.uade.api.models.EdificioModel;
 
 import java.util.List;
 
