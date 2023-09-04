@@ -1,6 +1,6 @@
-package com.uade.api.models.DAO;
+package com.uade.api.dao;
 
-import com.uade.api.models.Entity.UsuarioModel;
+import com.uade.api.models.ReclamoModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.hibernate.Session;
@@ -11,37 +11,38 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class UsuarioModelImpl implements IUsuarioModelDAO{
+public class ReclamoModelImpl implements IReclamoModelDAO{
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     @Transactional(readOnly = true)
-    public List<UsuarioModel> findAll() {
+    public List<ReclamoModel> findAll() {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<UsuarioModel> getQuery = currentSession.createQuery("from usuarios", UsuarioModel.class);
-        List<UsuarioModel> usuarios = getQuery.getResultList();
+        Query<ReclamoModel> getQuery = currentSession.createQuery("from reclamos", ReclamoModel.class);
+        List<ReclamoModel> reclamos = getQuery.getResultList();
 
-        return usuarios;
+        return reclamos;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public UsuarioModel findById(int id) {
+    public ReclamoModel findById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        UsuarioModel usuario = currentSession.get(UsuarioModel.class, id);
+        ReclamoModel reclamo = currentSession.get(ReclamoModel.class, id);
 
-        return usuario;
+        return reclamo;
     }
 
     @Override
     @Transactional
-    public void save(UsuarioModel usuario) {
+    public void save(ReclamoModel reclamo) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        currentSession.persist(usuario);
+        currentSession.persist(reclamo);
     }
 
     @Override
@@ -49,8 +50,8 @@ public class UsuarioModelImpl implements IUsuarioModelDAO{
     public void deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query theQuery = currentSession.createQuery("delete from usuarios where id=:idUsuario");
-        theQuery.setParameter("idUsuario", id);
+        Query theQuery = currentSession.createQuery("delete from reclamos where id=:idReclamo");
+        theQuery.setParameter("idReclamo", id);
         theQuery.executeUpdate();
     }
 }

@@ -1,6 +1,6 @@
 package com.uade.api.services;
 
-import com.uade.api.models.Entity.UsuarioModel;
+import com.uade.api.models.UsuarioModel;
 
 import java.util.List;
 

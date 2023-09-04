@@ -1,7 +1,7 @@
 package com.uade.api.services;
 
-import com.uade.api.models.DAO.IEdificioModelDAO;
-import com.uade.api.models.Entity.EdificioModel;
+import com.uade.api.dao.IEdificioModelDAO;
+import com.uade.api.models.EdificioModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

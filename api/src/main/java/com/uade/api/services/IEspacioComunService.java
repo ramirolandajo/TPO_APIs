@@ -1,6 +1,6 @@
 package com.uade.api.services;
 
-import com.uade.api.models.Entity.EspacioComunModel;
+import com.uade.api.models.EspacioComunModel;
 
 import java.util.List;
 

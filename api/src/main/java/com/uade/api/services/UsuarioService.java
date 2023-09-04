@@ -1,7 +1,7 @@
 package com.uade.api.services;
 
-import com.uade.api.models.DAO.IUsuarioModelDAO;
-import com.uade.api.models.Entity.UsuarioModel;
+import com.uade.api.dao.IUsuarioModelDAO;
+import com.uade.api.models.UsuarioModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

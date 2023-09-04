@@ -1,4 +1,4 @@
-package com.uade.api.models.Entity;
+package com.uade.api.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

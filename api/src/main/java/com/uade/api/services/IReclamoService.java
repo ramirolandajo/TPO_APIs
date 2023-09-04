@@ -1,6 +1,6 @@
 package com.uade.api.services;
 
-import com.uade.api.models.Entity.ReclamoModel;
+import com.uade.api.models.ReclamoModel;
 
 import java.util.List;
 

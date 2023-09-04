@@ -1,7 +1,7 @@
 package com.uade.api.services;
 
-import com.uade.api.models.DAO.IEspacioComunModelDAO;
-import com.uade.api.models.Entity.EspacioComunModel;
+import com.uade.api.dao.IEspacioComunModelDAO;
+import com.uade.api.models.EspacioComunModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
