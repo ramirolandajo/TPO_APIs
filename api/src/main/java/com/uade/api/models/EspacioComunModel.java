@@ -1,25 +1,20 @@
-package com.uade.api.models.Entity;
+package com.uade.api.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Entity
-@Table(name = "unidades")
+@Table(name = "espacios_comunes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UnidadModel {
+public class EspacioComunModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUnidad;
+    private Long idEspacioComun;
     private int piso;
-    private int numero;
-    private boolean habitada;
-    @OneToOne
-    private UsuarioModel duenio;
-    @OneToOne
-    private UsuarioModel inquilino;
+    private String descripcion;
     @ManyToOne
     @JoinColumn(name = "Edificio_Id")
     private EdificioModel edificio;

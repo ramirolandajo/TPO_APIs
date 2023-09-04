@@ -1,6 +1,6 @@
-package com.uade.api.models.DAO;
+package com.uade.api.dao;
 
-import com.uade.api.models.Entity.UnidadModel;
+import com.uade.api.models.UsuarioModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.hibernate.Session;
@@ -11,37 +11,37 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class UnidadModelImpl implements IUnidadModelDAO{
+public class UsuarioModelImpl implements IUsuarioModelDAO{
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     @Transactional(readOnly = true)
-    public List<UnidadModel> findAll() {
+    public List<UsuarioModel> findAll() {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<UnidadModel> getQuery = currentSession.createQuery("from unidades", UnidadModel.class);
-        List<UnidadModel> unidades = getQuery.getResultList();
+        Query<UsuarioModel> getQuery = currentSession.createQuery("from usuarios", UsuarioModel.class);
+        List<UsuarioModel> usuarios = getQuery.getResultList();
 
-        return unidades;
+        return usuarios;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public UnidadModel findById(int id) {
+    public UsuarioModel findById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        UnidadModel unidad = currentSession.get(UnidadModel.class, id);
+        UsuarioModel usuario = currentSession.get(UsuarioModel.class, id);
 
-        return unidad;
+        return usuario;
     }
 
     @Override
     @Transactional
-    public void save(UnidadModel unidad) {
+    public void save(UsuarioModel usuario) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        currentSession.persist(unidad);
+        currentSession.persist(usuario);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class UnidadModelImpl implements IUnidadModelDAO{
     public void deleteById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query theQuery = currentSession.createQuery("delete from unidades where id=:idUnidad");
-        theQuery.setParameter("idUnidad", id);
+        Query theQuery = currentSession.createQuery("delete from usuarios where id=:idUsuario");
+        theQuery.setParameter("idUsuario", id);
         theQuery.executeUpdate();
     }
 }

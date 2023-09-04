@@ -1,6 +1,6 @@
 package com.uade.api.services;
 
-import com.uade.api.models.Entity.UnidadModel;
+import com.uade.api.models.UnidadModel;
 
 import java.util.List;
 
