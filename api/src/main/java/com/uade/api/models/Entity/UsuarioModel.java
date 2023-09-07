@@ -19,7 +19,7 @@ public class UsuarioModel {
     private String nombreCompleto;
     private TipoUsuario tipoUsuario;
 
-    public UsuarioModel(String usuario, String password, int cuil, String nombreCompleto, TipoUsuario tipoUsuario) {
+    public UsuarioModel(String usuario, String password, String cuil, String nombreCompleto, TipoUsuario tipoUsuario) {
         this.usuario = usuario;
         this.password = password;
         this.cuil = cuil;
@@ -43,11 +43,11 @@ public class UsuarioModel {
         this.password = password;
     }
 
-    public int getCuil() {
+    public String getCuil() {
         return cuil;
     }
 
-    public void setCuil(int cuil) {
+    public void setCuil(String cuil) {
         this.cuil = cuil;
     }
 

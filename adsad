@@ -1,0 +1,49 @@
+[33mcommit 4e7353a2ecd84d3b21e337ad4dffeef7c4c2042d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 43e8064 877695d
+Author: Valentin Quiroga <valenquiroga2017@gmail.com>
+Date:   Sat Sep 2 18:50:21 2023 -0300
+
+    Agregado de repositorios y servicios
+
+[33mcommit 43e8064929cd09cdca2f5379255351abaf842528[m
+Author: Valentin Quiroga <valenquiroga2017@gmail.com>
+Date:   Sat Sep 2 18:32:43 2023 -0300
+
+    Agregado de repositorios y servicios
+
+[33mcommit 877695d9a419debf6c9d75e08965281bce21bd19[m
+Author: Mateo Rosello <rosellomateo@gmail.com>
+Date:   Sat Sep 2 15:16:57 2023 -0300
+
+    constructores, getters y setters
+
+[33mcommit d23b8e6b0674a29510bf1df403849f1be4cafc53[m
+Author: Valentin Quiroga <valenquiroga2017@gmail.com>
+Date:   Tue Aug 29 13:14:09 2023 -0300
+
+    Agregado de atributos en clase EspacioComun y UnidadModel para mapeo en base de datos
+
+[33mcommit b2edbf50b6b0259dc6214f6c8b7b149c6fdfed91[m
+Merge: 862b014 c2db491
+Author: Ramiro Landajo <ramalandajo@gmail.com>
+Date:   Tue Aug 29 09:39:25 2023 -0300
+
+    Merge branch 'main' of github.com:ramirolandajo/TPO_APIs
+
+[33mcommit 862b0147285427828e518b1d1e96b2e690c9cce9[m
+Author: Ramiro Landajo <ramalandajo@gmail.com>
+Date:   Tue Aug 29 09:38:59 2023 -0300
+
+    Agregando paquetes
+
+[33mcommit c2db491945bf4fddd3ce406121490ee00b852801[m
+Author: Ramiro Landajo <68570130+ramirolandajo@users.noreply.github.com>
+Date:   Tue Aug 29 09:34:20 2023 -0300
+
+    Update README.md
+
+[33mcommit a7d9411e86fd238d826047bdac8eba5122cac974[m
+Author: Ramiro Landajo <ramalandajo@gmail.com>
+Date:   Tue Aug 29 09:29:08 2023 -0300
+
+    Primer commit
