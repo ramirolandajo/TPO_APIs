@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigInteger;
+
 @Entity
 @Table (name = "usuarios")
 @Data
@@ -12,14 +15,14 @@ import lombok.NoArgsConstructor;
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;
+    private int idUsuario;
     private String usuario;
     private String password;
     private String cuil;
     private String nombreCompleto;
     private TipoUsuario tipoUsuario;
 
-    public UsuarioModel(String usuario, String password, int cuil, String nombreCompleto, TipoUsuario tipoUsuario) {
+    public UsuarioModel(String usuario, String password, String cuil, String nombreCompleto, TipoUsuario tipoUsuario) {
         this.usuario = usuario;
         this.password = password;
         this.cuil = cuil;
@@ -43,11 +46,11 @@ public class UsuarioModel {
         this.password = password;
     }
 
-    public int getCuil() {
+    public String getCuil() {
         return cuil;
     }
 
-    public void setCuil(int cuil) {
+    public void setCuil(String cuil) {
         this.cuil = cuil;
     }
 

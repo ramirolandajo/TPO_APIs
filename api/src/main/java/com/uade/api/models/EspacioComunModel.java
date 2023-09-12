@@ -4,15 +4,18 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigInteger;
+
 @Entity
-@Table(name = "espacios_comunes")
+@Table(name = "espaciosComunes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EspacioComunModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEspacioComun;
+    private int idEspacioComun;
     private int piso;
     private String descripcion;
     @ManyToOne

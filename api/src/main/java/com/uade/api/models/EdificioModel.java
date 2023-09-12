@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ import java.util.List;
 public class EdificioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEdificio;
+    private int idEdificio;
     private String direccion;
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
     private List<UnidadModel> unidades;
