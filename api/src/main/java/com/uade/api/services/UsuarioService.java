@@ -1,50 +1,66 @@
 package com.uade.api.services;
 
-import com.uade.api.dao.IUsuarioModelDAO;
 import com.uade.api.models.UsuarioModel;
+import com.uade.api.repositories.IUsuarioRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Optional;
+@Slf4j
 @Service
-public class UsuarioService implements IUsuarioService{
+public class UsuarioService {
     @Autowired
-    private IUsuarioModelDAO usuarioDAO;
-    @Override
-    public List<UsuarioModel> findAll() {
-        List<UsuarioModel> usuarios = usuarioDAO.findAll();
-        return usuarios;
-    }
+    private IUsuarioRepository usuarioRepository;
 
-    @Override
-    public UsuarioModel findById(int id) {
-        UsuarioModel usuario = usuarioDAO.findById(id);
-        return usuario;
-    }
-
-    @Override
-    public void save(UsuarioModel usuario) {
-        usuarioDAO.save(usuario);
-    }
-
-    @Override
-    public void update(int idUsuario, UsuarioModel usuario) {
-        UsuarioModel usuarioExistente = usuarioDAO.findById(idUsuario);
-
-        if(usuarioExistente != null){
-            usuarioExistente.setUsuario(usuario.getUsuario());
-            usuarioExistente.setPassword(usuario.getPassword());
-            usuarioExistente.setCuil(usuario.getCuil());
-            usuarioExistente.setNombreCompleto(usuario.getNombreCompleto());
-            usuarioExistente.setTipoUsuario(usuario.getTipoUsuario());
-
-            usuarioDAO.save(usuarioExistente);
+    public UsuarioModel createUsuario(UsuarioModel newUsuario) throws Exception {
+        Optional<UsuarioModel> usuarioOp = usuarioRepository.findById(newUsuario.getIdUsuario());
+        if (usuarioOp.isPresent()) {
+            throw new Exception("El usuario que esta intentando crear ya se encuentra en la base de datos");
         }
+        return this.usuarioRepository.save(newUsuario);
     }
 
-    @Override
-    public void deleteById(int id) {
-        usuarioDAO.deleteById(id);
+    public UsuarioModel updateUsuario(UsuarioModel usuario, Long id) throws Exception {
+        log.info("Id ingresado: " + id);
+        if (id <= 0){
+            log.info("El id ingresado no es valido.");
+            throw new Exception("El id ingresado no es valido");
+        }
+
+        Optional<UsuarioModel> usuarioOp = usuarioRepository.findById(usuario.getIdUsuario());
+
+        if (usuarioOp.isEmpty()) {
+            log.info("El usuario que intenta actualizar no se encuentra en la base de datos");
+            throw new Exception("El usuario que intenta actualizar no se encuentra en la base de datos");
+        }
+
+        UsuarioModel usuarioDb = usuarioOp.get();
+        usuarioDb.setUsuario(usuario.getUsuario());
+        usuarioDb.setTipoUsuario(usuario.getTipoUsuario());
+        usuarioDb.setCuil(usuario.getCuil());
+        usuarioDb.setPassword(usuario.getPassword());
+        usuarioDb.setNombreCompleto(usuario.getNombreCompleto());
+
+        log.info("El usuario actualizado: " + usuarioDb);
+        return this.usuarioRepository.save(usuarioDb);
+    }
+
+    public UsuarioModel findUsuarioById(Long id) throws Exception {
+        log.info("Id ingresado: " + id);
+        if (id <= 0){
+            log.info("El id ingresado no es valido.");
+            throw new Exception("El id ingresado no es valido");
+        }
+        Optional<UsuarioModel> usuarioOp = usuarioRepository.findById(id);
+        if (usuarioOp.isEmpty()) {
+            throw new Exception("El usuario de id: " + id + " no se encuentra en la BD");
+        }
+        return usuarioOp.get();
+    }
+
+    public List<UsuarioModel> findAllUsuarios() {
+        return this.usuarioRepository.findAll();
     }
 }

@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
-
 @Entity
 @Table(name = "reclamos")
 @Data
@@ -15,7 +13,7 @@ import java.math.BigInteger;
 public class ReclamoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idReclamo;
+    private Long idReclamo;
     private String estado;
     private String descripcion;
     @OneToOne

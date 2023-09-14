@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
-
 @Entity
 @Table(name = "espaciosComunes")
 @Data
@@ -15,7 +13,7 @@ import java.math.BigInteger;
 public class EspacioComunModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idEspacioComun;
+    private Long idEspacioComun;
     private int piso;
     private String descripcion;
     @ManyToOne

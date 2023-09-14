@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
-
 @Entity
 @Table(name = "unidades")
 @Data
@@ -15,7 +13,7 @@ import java.math.BigInteger;
 public class UnidadModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUnidad;
+    private Long idUnidad;
     private int piso;
     private int numero;
     private boolean habitada;

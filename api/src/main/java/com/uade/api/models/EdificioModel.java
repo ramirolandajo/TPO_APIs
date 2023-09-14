@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Entity
@@ -16,13 +15,11 @@ import java.util.List;
 public class EdificioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idEdificio;
+    private Long idEdificio;
     private String direccion;
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
     private List<UnidadModel> unidades;
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
     private List<EspacioComunModel> espaciosComunes;
-    public boolean soyEseEdificio(int id){
-        return this.idEdificio==id;
-    }
+
 }
