@@ -17,7 +17,6 @@ public class UsuarioModel {
     private String usuario;
     private String password;
     private String cuil;
-    @Column(name = "nombre_completo")
     private String nombreCompleto;
     private String tipoUsuario;
 

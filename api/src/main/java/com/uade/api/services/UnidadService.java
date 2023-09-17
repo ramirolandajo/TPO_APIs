@@ -61,7 +61,7 @@ public class UnidadService {
         return unidadOp.get();
     }
 
-    public List<UnidadModel> findAllUnidads() {
+    public List<UnidadModel> findAllUnidades() {
         return this.unidadRepository.findAll();
     }
 }

@@ -60,7 +60,7 @@ public class EspacioComunService {
         return espacioComunOp.get();
     }
 
-    public List<EspacioComunModel> findAllEspacioComuns() {
+    public List<EspacioComunModel> findAllEspacioComunes() {
         return this.espacioComunRepository.findAll();
     }
 }
