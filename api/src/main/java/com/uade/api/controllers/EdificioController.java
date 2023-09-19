@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping(path ="/tpo_apis/edificios")
+@RequestMapping(path ="tpo_apis/edificios")
 public class EdificioController {
 
     @Autowired
     private EdificioService edificioService;
 
     @PostMapping(path ="/")
-    public ResponseEntity<?> createEdificio(@RequestBody EdificioModel edificio) throws Exception {
+    public ResponseEntity<?> createEdificio(@RequestBody EdificioModel edificio) {
         return new ResponseEntity<>(edificioService.createEdificio(edificio), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping(path = "/tpo_apis/espacios_comunes")
+@RequestMapping(path = "tpo_apis/espacios_comunes")
 public class EspacioComunController {
     @Autowired
     private EspacioComunService espacioComunService;
 
     @PostMapping(path ="/")
-    public ResponseEntity<?> createEspacioComun(@RequestBody EspacioComunModel espacioComun) throws Exception {
+    public ResponseEntity<?> createEspacioComun(@RequestBody EspacioComunModel espacioComun) {
         return new ResponseEntity<>(espacioComunService.createEspacioComun(espacioComun), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")

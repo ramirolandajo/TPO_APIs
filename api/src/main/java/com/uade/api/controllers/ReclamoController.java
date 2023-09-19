@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/tpo_apis/reclamos")
+@RequestMapping(path = "tpo_apis/reclamos")
 public class ReclamoController {
 
     @Autowired
     private ReclamoService reclamoService;
 
     @PostMapping(path ="/")
-    public ResponseEntity<?> createReclamo(@RequestBody ReclamoModel reclamo) throws Exception {
+    public ResponseEntity<?> createReclamo(@RequestBody ReclamoModel reclamo) {
         return new ResponseEntity<>(reclamoService.createReclamo(reclamo), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")

@@ -14,11 +14,7 @@ public class UnidadService {
     @Autowired
     private IUnidadRepository unidadRepository;
 
-    public UnidadModel createUnidad(UnidadModel newUnidad) throws Exception {
-        Optional<UnidadModel> unidadOp = unidadRepository.findById(newUnidad.getIdUnidad());
-        if (unidadOp.isPresent()) {
-            throw new Exception("La unidad que esta intentando crear ya se encuentra en la base de datos");
-        }
+    public UnidadModel createUnidad(UnidadModel newUnidad) {
         return this.unidadRepository.save(newUnidad);
     }
 
@@ -29,7 +25,7 @@ public class UnidadService {
             throw new Exception("El id ingresado no es valido");
         }
 
-        Optional<UnidadModel> unidadOp = unidadRepository.findById(unidad.getIdUnidad());
+        Optional<UnidadModel> unidadOp = unidadRepository.findById(unidad.getId_unidad());
 
         if (unidadOp.isEmpty()) {
             log.info("La unidad que intenta actualizar no se encuentra en la base de datos");

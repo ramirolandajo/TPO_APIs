@@ -15,7 +15,7 @@ public class UsuarioService {
     private IUsuarioRepository usuarioRepository;
 
     public UsuarioModel createUsuario(UsuarioModel newUsuario) throws Exception {
-        Optional<UsuarioModel> usuarioOp = usuarioRepository.findById(newUsuario.getIdUsuario());
+        Optional<UsuarioModel> usuarioOp = usuarioRepository.findUserByCuil(newUsuario.getCuil());
         if (usuarioOp.isPresent()) {
             throw new Exception("El usuario que esta intentando crear ya se encuentra en la base de datos");
         }
@@ -29,7 +29,7 @@ public class UsuarioService {
             throw new Exception("El id ingresado no es valido");
         }
 
-        Optional<UsuarioModel> usuarioOp = usuarioRepository.findById(usuario.getIdUsuario());
+        Optional<UsuarioModel> usuarioOp = usuarioRepository.findById(usuario.getId_usuario());
 
         if (usuarioOp.isEmpty()) {
             log.info("El usuario que intenta actualizar no se encuentra en la base de datos");
@@ -38,10 +38,10 @@ public class UsuarioService {
 
         UsuarioModel usuarioDb = usuarioOp.get();
         usuarioDb.setUsuario(usuario.getUsuario());
-        usuarioDb.setTipoUsuario(usuario.getTipoUsuario());
+        usuarioDb.setTipo_usuario(usuario.getTipo_usuario());
         usuarioDb.setCuil(usuario.getCuil());
         usuarioDb.setPassword(usuario.getPassword());
-        usuarioDb.setNombreCompleto(usuario.getNombreCompleto());
+        usuarioDb.setNombre_completo(usuario.getNombre_completo());
 
         log.info("El usuario actualizado: " + usuarioDb);
         return this.usuarioRepository.save(usuarioDb);

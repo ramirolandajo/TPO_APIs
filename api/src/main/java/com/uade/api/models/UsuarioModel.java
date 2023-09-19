@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;
+    private Long id_usuario;
     private String usuario;
     private String password;
     private String cuil;
-    private String nombreCompleto;
-    private String tipoUsuario;
+    private String nombre_completo;
+    private TipoUsuario tipo_usuario;
 
 }

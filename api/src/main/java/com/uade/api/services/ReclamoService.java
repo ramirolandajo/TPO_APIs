@@ -15,11 +15,7 @@ public class ReclamoService {
     @Autowired
     private IReclamoRepository reclamoRepository;
 
-    public ReclamoModel createReclamo(ReclamoModel newReclamo) throws Exception {
-        Optional<ReclamoModel> reclamoOp = reclamoRepository.findById(newReclamo.getIdReclamo());
-        if (reclamoOp.isPresent()) {
-            throw new Exception("El reclamo que esta intentando crear ya se encuentra en la base de datos");
-        }
+    public ReclamoModel createReclamo(ReclamoModel newReclamo) {
         return this.reclamoRepository.save(newReclamo);
     }
 
@@ -30,7 +26,7 @@ public class ReclamoService {
             throw new Exception("El id ingresado no es valido");
         }
 
-        Optional<ReclamoModel> reclamoOp = reclamoRepository.findById(reclamo.getIdReclamo());
+        Optional<ReclamoModel> reclamoOp = reclamoRepository.findById(reclamo.getId_reclamo());
 
         if (reclamoOp.isEmpty()) {
             log.info("El reclamo que intenta actualizar no se encuentra en la base de datos");

@@ -16,11 +16,7 @@ public class EspacioComunService {
     @Autowired
     private IEspacioComunRepository espacioComunRepository;
 
-    public EspacioComunModel createEspacioComun(EspacioComunModel newEspacioComun) throws Exception {
-        Optional<EspacioComunModel> espacioComunOp = espacioComunRepository.findById(newEspacioComun.getIdEspacioComun());
-        if (espacioComunOp.isPresent()) {
-            throw new Exception("El espacio comun que esta intentando crear ya se encuentra en la base de datos");
-        }
+    public EspacioComunModel createEspacioComun(EspacioComunModel newEspacioComun) {
         return this.espacioComunRepository.save(newEspacioComun);
     }
 
@@ -31,7 +27,7 @@ public class EspacioComunService {
             throw new Exception("El id ingresado no es valido");
         }
 
-        Optional<EspacioComunModel> espacioComunOp = espacioComunRepository.findById(espacioComun.getIdEspacioComun());
+        Optional<EspacioComunModel> espacioComunOp = espacioComunRepository.findById(espacioComun.getId_espacio_comun());
 
         if (espacioComunOp.isEmpty()) {
             log.info("El espacio comun que intenta actualizar no se encuentra en la base de datos");

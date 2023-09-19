@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class UnidadModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUnidad;
+    private Long id_unidad;
     private int piso;
     private int numero;
     private boolean habitada;
@@ -22,6 +22,6 @@ public class UnidadModel {
     @OneToOne
     private UsuarioModel inquilino;
     @ManyToOne
-    @JoinColumn(name = "Edificio_Id")
+    @JoinColumn(name = "id_edificio")
     private EdificioModel edificio;
 }

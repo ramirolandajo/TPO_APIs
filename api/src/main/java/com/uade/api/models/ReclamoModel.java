@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class ReclamoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idReclamo;
+    private Long id_reclamo;
     private String estado;
     private String descripcion;
     @OneToOne
