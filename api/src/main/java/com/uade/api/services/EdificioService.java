@@ -18,7 +18,7 @@ public class EdificioService {
     @Autowired
     private IEdificioRepository edificioRepository;
     @Autowired
-    private IEspacioComunRepository espacioComunRepository;
+    private EspacioComunService espacioComunService;
     @Autowired
     private UnidadService unidadService;
 
@@ -27,14 +27,14 @@ public class EdificioService {
         List<UnidadModel> unidades = new ArrayList<>();
         for (UnidadModel u: newEdificio.getUnidades()) {
             u.setEdificio(newEdificio);
-            this.unidadService.createUnidad(u, newEdificio);               // creamos la unidad en la db para tener el id para el edificio
+            this.unidadService.createUnidad(u);               // creamos la unidad en la db para tener el id para el edificio
             unidades.add(u);
         }
 
         List<EspacioComunModel> espaciosComunes = new ArrayList<>();
         for (EspacioComunModel e: newEdificio.getEspaciosComunes()){
             e.setEdificio(newEdificio);
-            this.espacioComunRepository.save(e);            // guardamos para tener el id para el edificio
+            this.espacioComunService.createEspacioComun(e);            // guardamos para tener el id para el edificio
             espaciosComunes.add(e);
         }
 

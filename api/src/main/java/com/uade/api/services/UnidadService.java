@@ -18,7 +18,7 @@ public class UnidadService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public UnidadModel createUnidad(UnidadModel newUnidad, EdificioModel edificio) throws Exception {
+    public UnidadModel createUnidad(UnidadModel newUnidad) throws Exception {
         Optional<UsuarioModel> duenioOp = Optional.ofNullable(this.usuarioService.findUsuarioById(newUnidad.getDuenio().getIdUsuario()));
         if (duenioOp.isEmpty()) {
             log.error("El usuario (duenio) con ID " + newUnidad.getDuenio().getIdUsuario() + " no se encuentra en la BD");
@@ -31,7 +31,6 @@ public class UnidadService {
                 throw new Exception("El usuario (inquilino) con ID " + newUnidad.getInquilino().getIdUsuario() + " no se encuentra en la BD");
             }
         }
-        newUnidad.setEdificio(edificio);
         return this.unidadRepository.save(newUnidad);
     }
 
