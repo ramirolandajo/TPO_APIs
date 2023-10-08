@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class ReclamoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_reclamo;
+    private Long idReclamo;
     private String estado;
     private String descripcion;
     @OneToOne
@@ -22,4 +22,6 @@ public class ReclamoModel {
     private EdificioModel edificio;
     @OneToOne
     private UnidadModel unidad;
+    @OneToOne
+    private EspacioComunModel espacioComun;
 }

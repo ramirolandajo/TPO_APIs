@@ -17,7 +17,7 @@ public class ReclamoController {
     private ReclamoService reclamoService;
 
     @PostMapping(path ="/")
-    public ResponseEntity<?> createReclamo(@RequestBody ReclamoModel reclamo) {
+    public ResponseEntity<?> createReclamo(@RequestBody ReclamoModel reclamo) throws Exception {
         return new ResponseEntity<>(reclamoService.createReclamo(reclamo), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")

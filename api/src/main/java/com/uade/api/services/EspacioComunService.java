@@ -27,7 +27,7 @@ public class EspacioComunService {
             throw new Exception("El id ingresado no es valido");
         }
 
-        Optional<EspacioComunModel> espacioComunOp = espacioComunRepository.findById(espacioComun.getId_espacio_comun());
+        Optional<EspacioComunModel> espacioComunOp = this.espacioComunRepository.findById(espacioComun.getIdEspacioComun());
 
         if (espacioComunOp.isEmpty()) {
             log.info("El espacio comun que intenta actualizar no se encuentra en la base de datos");
@@ -49,7 +49,7 @@ public class EspacioComunService {
             log.info("El id ingresado no es valido.");
             throw new Exception("El id ingresado no es valido");
         }
-        Optional<EspacioComunModel> espacioComunOp = espacioComunRepository.findById(id);
+        Optional<EspacioComunModel> espacioComunOp = this.espacioComunRepository.findById(id);
         if (espacioComunOp.isEmpty()) {
             throw new Exception("El espacio comun de id: " + id + " no se encuentra en la BD");
         }

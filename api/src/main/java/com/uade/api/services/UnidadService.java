@@ -1,6 +1,8 @@
 package com.uade.api.services;
 
+import com.uade.api.models.EdificioModel;
 import com.uade.api.models.UnidadModel;
+import com.uade.api.models.UsuarioModel;
 import com.uade.api.repositories.IUnidadRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,23 @@ import java.util.Optional;
 public class UnidadService {
     @Autowired
     private IUnidadRepository unidadRepository;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    public UnidadModel createUnidad(UnidadModel newUnidad) {
+    public UnidadModel createUnidad(UnidadModel newUnidad, EdificioModel edificio) throws Exception {
+        Optional<UsuarioModel> duenioOp = Optional.ofNullable(this.usuarioService.findUsuarioById(newUnidad.getDuenio().getIdUsuario()));
+        if (duenioOp.isEmpty()) {
+            log.error("El usuario (duenio) con ID " + newUnidad.getDuenio().getIdUsuario() + " no se encuentra en la BD");
+            throw new Exception("El usuario (duenio) con ID " + newUnidad.getDuenio().getIdUsuario() + " no se encuentra en la BD");
+        }
+        if (newUnidad.getInquilino() != null) {
+            Optional<UsuarioModel> inquilinoOp = Optional.ofNullable(this.usuarioService.findUsuarioById(newUnidad.getInquilino().getIdUsuario()));
+            if (inquilinoOp.isEmpty()) {
+                log.error("El usuario (inquilino) con ID " + newUnidad.getInquilino().getIdUsuario() + " no se encuentra en la BD");
+                throw new Exception("El usuario (inquilino) con ID " + newUnidad.getInquilino().getIdUsuario() + " no se encuentra en la BD");
+            }
+        }
+        newUnidad.setEdificio(edificio);
         return this.unidadRepository.save(newUnidad);
     }
 
@@ -25,7 +42,7 @@ public class UnidadService {
             throw new Exception("El id ingresado no es valido");
         }
 
-        Optional<UnidadModel> unidadOp = unidadRepository.findById(unidad.getId_unidad());
+        Optional<UnidadModel> unidadOp = unidadRepository.findById(unidad.getIdUnidad());
 
         if (unidadOp.isEmpty()) {
             log.info("La unidad que intenta actualizar no se encuentra en la base de datos");
@@ -34,7 +51,6 @@ public class UnidadService {
 
         UnidadModel unidadDb = unidadOp.get();
         unidadDb.setEdificio(unidad.getEdificio());
-        unidadDb.setHabitada(unidad.isHabitada());
         unidadDb.setDuenio(unidad.getDuenio());
         unidadDb.setNumero(unidad.getNumero());
         unidadDb.setPiso(unidad.getPiso());

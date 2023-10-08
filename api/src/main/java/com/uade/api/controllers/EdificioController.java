@@ -16,7 +16,7 @@ public class EdificioController {
     private EdificioService edificioService;
 
     @PostMapping(path ="/")
-    public ResponseEntity<?> createEdificio(@RequestBody EdificioModel edificio) {
+    public ResponseEntity<?> createEdificio(@RequestBody EdificioModel edificio) throws Exception {
         return new ResponseEntity<>(edificioService.createEdificio(edificio), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")

@@ -15,11 +15,11 @@ import java.util.List;
 public class EdificioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_edificio;
+    private Long idEdificio;
     private String direccion;
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
     private List<UnidadModel> unidades;
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
-    private List<EspacioComunModel> espacios_comunes;
+    private List<EspacioComunModel> espaciosComunes;
 
 }

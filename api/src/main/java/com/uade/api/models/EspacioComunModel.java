@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 public class EspacioComunModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_espacio_comun;
+    private Long idEspacioComun;
     private int piso;
     private String descripcion;
     @ManyToOne
-    @JoinColumn(name = "id_edificio")
+    @JoinColumn(name = "idEdificio")
     private EdificioModel edificio;
 }

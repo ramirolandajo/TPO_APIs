@@ -15,10 +15,6 @@ public class UnidadController {
     @Autowired
     private UnidadService unidadService;
 
-    @PostMapping(path ="/")
-    public ResponseEntity<?> createUnidad(@RequestBody UnidadModel unidad) {
-        return new ResponseEntity<>(unidadService.createUnidad(unidad), HttpStatus.CREATED);
-    }
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> updateUnidad(@RequestBody UnidadModel unidad, @PathVariable Long id) throws Exception {
         return new ResponseEntity<>(unidadService.updateUnidad(unidad, id), HttpStatus.OK);

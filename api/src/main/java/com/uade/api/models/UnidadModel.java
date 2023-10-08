@@ -13,15 +13,14 @@ import lombok.NoArgsConstructor;
 public class UnidadModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_unidad;
+    private Long idUnidad;
     private int piso;
     private int numero;
-    private boolean habitada;
     @OneToOne
     private UsuarioModel duenio;
     @OneToOne
     private UsuarioModel inquilino;
     @ManyToOne
-    @JoinColumn(name = "id_edificio")
+    @JoinColumn(name = "idEdificio")
     private EdificioModel edificio;
 }
