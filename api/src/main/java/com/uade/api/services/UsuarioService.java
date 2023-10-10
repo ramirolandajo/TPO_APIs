@@ -48,6 +48,10 @@ public class UsuarioService {
         return this.usuarioRepository.save(usuarioDb);
     }
 
+    public UsuarioModel findUsuario(String usuario, String password){
+        UsuarioModel user = usuarioRepository.findUsuario(usuario, password);
+        return user;
+    }
     public UsuarioModel findUsuarioById(Long id) throws Exception {
         log.info("Id ingresado: " + id);
         if (id <= 0){

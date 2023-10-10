@@ -4,7 +4,6 @@ import com.uade.api.models.EdificioModel;
 import com.uade.api.models.EspacioComunModel;
 import com.uade.api.models.UnidadModel;
 import com.uade.api.repositories.IEdificioRepository;
-import com.uade.api.repositories.IEspacioComunRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
