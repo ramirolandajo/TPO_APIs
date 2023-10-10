@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface IUsuarioRepository extends JpaRepository<UsuarioModel, Long> {
     Optional<UsuarioModel> findUserByCuil(String cuil);
-    UsuarioModel findUsuario(String usuario, String password);
+    Optional<UsuarioModel> findUserByUsuario(String usuario);
 }

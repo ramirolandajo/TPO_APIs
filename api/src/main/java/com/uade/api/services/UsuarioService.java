@@ -4,6 +4,7 @@ import com.uade.api.models.UsuarioModel;
 import com.uade.api.repositories.IUsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,8 +50,24 @@ public class UsuarioService {
     }
 
     public UsuarioModel findUsuario(String usuario, String password){
-        UsuarioModel user = usuarioRepository.findUsuario(usuario, password);
-        return user;
+        Optional<UsuarioModel> userOp = usuarioRepository.findUserByUsuario(usuario);
+
+        if(userOp.isPresent() && checkPassword(password, userOp.get().getPassword())) {
+            return userOp.get();
+        } else {
+            return null;
+        }
+    }
+
+    private boolean checkPassword(String password, String passwordDB) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        //String hashedPassword = passwordEncoder.encode(password);
+        System.out.println("Password: " + password);
+        //System.out.println("hashedPassword: " + hashedPassword);
+        System.out.println("passwordDB: " + passwordDB);
+        boolean passwordMatches = passwordEncoder.matches(password, passwordDB);
+
+        return passwordMatches;
     }
     public UsuarioModel findUsuarioById(Long id) throws Exception {
         log.info("Id ingresado: " + id);
