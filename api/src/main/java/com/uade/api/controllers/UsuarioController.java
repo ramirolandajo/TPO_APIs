@@ -14,26 +14,21 @@ import java.util.List;
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
-    @PostMapping(path ="/")
-    public ResponseEntity<?> createUnidad(@RequestBody UsuarioModel user) throws Exception {
+    @PostMapping(path ="/register")
+    public ResponseEntity<?> registerUsuario(@RequestBody UsuarioModel user) throws Exception {
         return new ResponseEntity<>(usuarioService.createUsuario(user), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateUnidad(@RequestBody UsuarioModel user, @PathVariable Long id) throws Exception {
+    public ResponseEntity<?> updateUsuario(@RequestBody UsuarioModel user, @PathVariable Long id) throws Exception {
         return new ResponseEntity<>(usuarioService.updateUsuario(user, id), HttpStatus.OK);
     }
     @GetMapping(path ="/{id}")
-    public ResponseEntity<?> getUnidadById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<?> getUsuarioById(@PathVariable Long id) throws Exception {
         UsuarioModel user = usuarioService.findUsuarioById(id);
-
-        if (user==null){
-            String mensaje = "Unidad no encontrado con el Id: " + id;
-            return new ResponseEntity<>(mensaje, HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
     @GetMapping(path ="/")
-    public List<UsuarioModel> getAllUnidades(){
+    public List<UsuarioModel> getAllUsuarios(){
         return usuarioService.findAllUsuarios();
     }
 }

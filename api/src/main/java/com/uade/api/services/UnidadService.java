@@ -6,6 +6,7 @@ import com.uade.api.models.UsuarioModel;
 import com.uade.api.repositories.IUnidadRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public class UnidadService {
     private IUnidadRepository unidadRepository;
     @Autowired
     private UsuarioService usuarioService;
+    @Lazy
+    @Autowired
+    private EdificioService edificioService;
 
     public UnidadModel createUnidad(UnidadModel newUnidad) throws Exception {
         Optional<UsuarioModel> duenioOp = Optional.ofNullable(this.usuarioService.findUsuarioById(newUnidad.getDuenio().getIdUsuario()));
@@ -31,6 +35,13 @@ public class UnidadService {
                 throw new Exception("El usuario (inquilino) con ID " + newUnidad.getInquilino().getIdUsuario() + " no se encuentra en la BD");
             }
         }
+
+        Optional<EdificioModel> edificioOp = Optional.ofNullable(this.edificioService.findEdificioById(newUnidad.getEdificio().getIdEdificio()));
+        if(edificioOp.isEmpty()){
+            log.error("El edificio con el ID " + newUnidad.getEdificio().getIdEdificio() + " no se encuentra en la base de datos.");
+            throw new Exception("El edificio con el ID " + newUnidad.getEdificio().getIdEdificio() + " no se encuentra en la base de datos.");
+        }
+
         return this.unidadRepository.save(newUnidad);
     }
 

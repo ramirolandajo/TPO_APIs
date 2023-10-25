@@ -62,10 +62,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private boolean validateToken(String token) {
         try {
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).build().parseClaimsJws(token);
+//            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).build().parseClaimsJws(token);
+            Jws<Claims> claimsJws = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token);
 
             // Verifica la firma y la expiración del token
-            if (isTokenSignatureValid(claimsJws) && isTokenNotExpired(claimsJws.getBody().getExpiration())) {
+            if (isTokenSignatureValid(claimsJws) && isTokenNotExpired(claimsJws.getPayload().getExpiration())) {
                 return true;
             }
         } catch (Exception e) {
@@ -78,7 +79,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private boolean isTokenSignatureValid(Jws<Claims> claimsJws) {
         // Verifica la firma del token con la clave secreta
         try {
-            claimsJws.getBody(); // Esto lanzará una excepción si la firma es inválida
+            claimsJws.getPayload(); // Esto lanzará una excepción si la firma es inválida
             return true;
         } catch (Exception e) {
             return false;
@@ -92,13 +93,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     public String extractUsernameFromToken(String token) {
         try {
-            Claims claims = Jwts.parser().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+//            Claims claims = Jwts.parser().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+            Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
 
             // Extraer el nombre de usuario de la carga útil del token
             String username = claims.getSubject();
             return username;
         } catch (Exception e) {
             // Manejar cualquier excepción que pueda ocurrir al analizar el token
+            this.logger.error("Could not extract username from token");
             return null;
         }
     }

@@ -21,6 +21,9 @@ public class UsuarioService {
             log.error("El usuario que esta intentando crear ya se encuentra en la base de datos");
             throw new Exception("El usuario que esta intentando crear ya se encuentra en la base de datos");
         }
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = bCryptPasswordEncoder.encode(newUsuario.getPassword());
+        newUsuario.setPassword(encodedPassword);
         return this.usuarioRepository.save(newUsuario);
     }
 
@@ -61,9 +64,7 @@ public class UsuarioService {
 
     private boolean checkPassword(String password, String passwordDB) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        //String hashedPassword = passwordEncoder.encode(password);
         System.out.println("Password: " + password);
-        //System.out.println("hashedPassword: " + hashedPassword);
         System.out.println("passwordDB: " + passwordDB);
         boolean passwordMatches = passwordEncoder.matches(password, passwordDB);
 

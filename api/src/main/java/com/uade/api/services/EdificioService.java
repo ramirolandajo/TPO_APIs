@@ -22,26 +22,24 @@ public class EdificioService {
     private UnidadService unidadService;
 
     public EdificioModel createEdificio(EdificioModel newEdificio) throws Exception {
-        this.edificioRepository.save(newEdificio);          // guardamos el edificio en la bd para tener el id
-        List<UnidadModel> unidades = new ArrayList<>();
-        for (UnidadModel u: newEdificio.getUnidades()) {
-            u.setEdificio(newEdificio);
-            this.unidadService.createUnidad(u);               // creamos la unidad en la db para tener el id para el edificio
-            unidades.add(u);
+        // verificamos que tenga la direccion
+        if (newEdificio.getDireccion()==null){
+            log.error("El edificio debe tener una dirección.");
+            throw new Exception("El edificio debe tener una dirección.");
         }
 
-        List<EspacioComunModel> espaciosComunes = new ArrayList<>();
-        for (EspacioComunModel e: newEdificio.getEspaciosComunes()){
-            e.setEdificio(newEdificio);
-            this.espacioComunService.createEspacioComun(e);            // guardamos para tener el id para el edificio
-            espaciosComunes.add(e);
+        // verificamos que no tengan ninguna unidad ni espacio comun ya que se agregan posteriormente
+        if (newEdificio.getUnidades()!=null){
+            log.error("El edificio no debe tener unidades asociadas.");
+            throw new Exception("El edificio no debe tener unidades asociadas.");
+        }
+        if (newEdificio.getEspaciosComunes()!=null){
+            log.error("El edificio no debe tener espacios comunes asociados.");
+            throw new Exception("El edificio no debe tener espacios comunes asociados.");
         }
 
-        newEdificio.setUnidades(unidades);
-        newEdificio.setEspaciosComunes(espaciosComunes);
-        log.info("Edificio completo: " + newEdificio);
-        this.edificioRepository.save(newEdificio);          // actualizamos el edificio con las unidades y espacios comunes con sus ids
-        return newEdificio;
+        log.info("Edificio cargado: " + newEdificio);
+        return this.edificioRepository.save(newEdificio);
     }
 
     public EdificioModel updateEdificio(EdificioModel edificio, Long id) throws Exception {

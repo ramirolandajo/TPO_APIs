@@ -9,10 +9,7 @@ import com.uade.api.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import io.jsonwebtoken.Jwts;
@@ -22,7 +19,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final int EXPIRATION_TIME_IN_MIN = 1;
+    private final int EXPIRATION_TIME_IN_MIN = 5;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -36,10 +33,9 @@ public class AuthController {
         // mecanismos)
         if (usuarioService.findUsuario(credentials.getUsuario(), credentials.getPassword()) != null) {
             // Crear el token JWT
-            String token = Jwts.builder().setSubject(credentials.getUsuario()).setIssuedAt(new Date())
-                    .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_IN_MIN * 60 * 1000))
+            String token = Jwts.builder().subject(credentials.getUsuario()).issuedAt(new Date())
+                    .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_IN_MIN * 60 * 1000))
                     .signWith(secretKey, SignatureAlgorithm.HS256).compact();
-
             return new ResponseEntity<>(token, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Credenciales inválidas.", HttpStatus.UNAUTHORIZED);
