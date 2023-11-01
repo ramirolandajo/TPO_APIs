@@ -1,6 +1,9 @@
 package com.uade.api.controllers;
 
+import com.uade.api.models.DTOs.EspacioComunDTO;
 import com.uade.api.models.EspacioComunModel;
+import com.uade.api.models.EspacioComunModel;
+import com.uade.api.services.EdificioService;
 import com.uade.api.services.EspacioComunService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +17,12 @@ public class EspacioComunController {
     @Autowired
     private EspacioComunService espacioComunService;
 
+    @Autowired
+    private EdificioService edificioService;
+
     @PostMapping(path ="/")
-    public ResponseEntity<?> createEspacioComun(@RequestBody EspacioComunModel espacioComun) {
+    public ResponseEntity<?> createEspacioComun(@RequestBody EspacioComunDTO espacioComunDTO) throws Exception {
+        EspacioComunModel espacioComun = convertToEntity(espacioComunDTO);
         return new ResponseEntity<>(espacioComunService.createEspacioComun(espacioComun), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")
@@ -35,5 +42,23 @@ public class EspacioComunController {
     @GetMapping(path ="/")
     public List<EspacioComunModel> getAllEspacioComunes(){
         return espacioComunService.findAllEspacioComunes();
+    }
+
+    private EspacioComunDTO convertToDTO(EspacioComunModel espacioComun) {
+        EspacioComunDTO espacioComunModelDTO = new EspacioComunDTO(
+                espacioComun.getPiso(),
+                espacioComun.getDescripcion(),
+                espacioComun.getEdificio().getIdEdificio()
+        );
+        return espacioComunModelDTO;
+    }
+
+    private EspacioComunModel convertToEntity(EspacioComunDTO espacioComunDTO) throws Exception {
+        EspacioComunModel espacioComun = new EspacioComunModel(
+                espacioComunDTO.getPiso(),
+                espacioComunDTO.getDescripcion(),
+                this.edificioService.findEdificioById(espacioComunDTO.getIdEdificio())
+        );
+        return espacioComun;
     }
 }

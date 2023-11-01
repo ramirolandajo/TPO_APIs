@@ -1,13 +1,13 @@
 package com.uade.api.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "espacios_comunes")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class EspacioComunModel {
@@ -19,4 +19,10 @@ public class EspacioComunModel {
     @ManyToOne
     @JoinColumn(name = "idEdificio")
     private EdificioModel edificio;
+
+    public EspacioComunModel(int piso, String descripcion, EdificioModel edificio) {
+        this.piso = piso;
+        this.descripcion = descripcion;
+        this.edificio = edificio;
+    }
 }

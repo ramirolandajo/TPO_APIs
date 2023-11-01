@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @RestController
 @RequestMapping(path = "tpo_apis/unidades")
 public class UnidadController {
@@ -28,6 +29,7 @@ public class UnidadController {
     @PostMapping(path = "/")
     public ResponseEntity<?> createUnidad(@RequestBody UnidadModelDTO unidadDTO) throws Exception {
         UnidadModel unidad = convertToEntity(unidadDTO);
+        System.out.println("Unidad del create " + unidad);
         return new ResponseEntity<>(unidadService.createUnidad(unidad), HttpStatus.OK);
     }
 
@@ -62,14 +64,23 @@ public class UnidadController {
     }
 
     private UnidadModel convertToEntity(UnidadModelDTO unidadDTO) throws Exception {
-        UnidadModel unidad = new UnidadModel(
-                null,
-                unidadDTO.getPiso(),
-                unidadDTO.getNumero(),
-                usuarioService.findUsuarioById(unidadDTO.getIdDuenio()),
-                usuarioService.findUsuarioById(unidadDTO.getIdInquilino()),
-                edificioService.findEdificioById(unidadDTO.getIdEdificio())
-        );
-        return unidad;
+        if (unidadDTO.getIdInquilino() != null) {
+            UnidadModel unidad = new UnidadModel(
+                    unidadDTO.getPiso(),
+                    unidadDTO.getNumero(),
+                    usuarioService.findUsuarioById(unidadDTO.getIdDuenio()),
+                    usuarioService.findUsuarioById(unidadDTO.getIdInquilino()),
+                    edificioService.findEdificioById(unidadDTO.getIdEdificio())
+            );
+            return unidad;
+        } else {
+            UnidadModel unidad = new UnidadModel(
+                    unidadDTO.getPiso(),
+                    unidadDTO.getNumero(),
+                    usuarioService.findUsuarioById(unidadDTO.getIdDuenio()),
+                    edificioService.findEdificioById(unidadDTO.getIdEdificio())
+            );
+            return unidad;
+        }
     }
 }
