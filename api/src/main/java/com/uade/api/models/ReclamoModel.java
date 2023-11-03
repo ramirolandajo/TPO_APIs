@@ -23,4 +23,13 @@ public class ReclamoModel {
     private UnidadModel unidad;
     @OneToOne
     private EspacioComunModel espacioComun;
+
+    public ReclamoModel(String estado, String descripcion, UsuarioModel usuario, EdificioModel edificio, UnidadModel unidad, EspacioComunModel espacioComun) {
+        this.estado = estado;
+        this.descripcion = descripcion;
+        this.usuario = usuario;
+        this.edificio = edificio;
+        this.unidad = unidad;
+        this.espacioComun = espacioComun;
+    }
 }

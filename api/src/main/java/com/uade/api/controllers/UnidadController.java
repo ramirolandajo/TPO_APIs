@@ -29,12 +29,12 @@ public class UnidadController {
     @PostMapping(path = "/")
     public ResponseEntity<?> createUnidad(@RequestBody UnidadModelDTO unidadDTO) throws Exception {
         UnidadModel unidad = convertToEntity(unidadDTO);
-        System.out.println("Unidad del create " + unidad);
         return new ResponseEntity<>(unidadService.createUnidad(unidad), HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateUnidad(@RequestBody UnidadModel unidad, @PathVariable Long id) throws Exception {
+    public ResponseEntity<?> updateUnidad(@RequestBody UnidadModelDTO unidadDTO, @PathVariable Long id) throws Exception {
+        UnidadModel unidad = convertToEntity(unidadDTO);
         return new ResponseEntity<>(unidadService.updateUnidad(unidad, id), HttpStatus.OK);
     }
     @GetMapping(path ="/{id}")

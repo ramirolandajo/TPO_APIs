@@ -26,7 +26,8 @@ public class EspacioComunController {
         return new ResponseEntity<>(espacioComunService.createEspacioComun(espacioComun), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateEspacioComun(@RequestBody EspacioComunModel espacioComun, @PathVariable Long id) throws Exception {
+    public ResponseEntity<?> updateEspacioComun(@RequestBody EspacioComunDTO espacioComunDTO, @PathVariable Long id) throws Exception {
+        EspacioComunModel espacioComun = convertToEntity(espacioComunDTO);
         return new ResponseEntity<>(espacioComunService.updateEspacioComun(espacioComun, id), HttpStatus.OK);
     }
     @GetMapping(path ="/{id}")

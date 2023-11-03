@@ -1,7 +1,8 @@
 package com.uade.api.controllers;
 
+import com.uade.api.models.DTOs.ReclamoModelDTO;
 import com.uade.api.models.ReclamoModel;
-import com.uade.api.services.ReclamoService;
+import com.uade.api.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,26 @@ public class ReclamoController {
     @Autowired
     private ReclamoService reclamoService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private EdificioService edificioService;
+
+    @Autowired
+    private UnidadService unidadService;
+
+    @Autowired
+    private EspacioComunService espacioComunService;
+
     @PostMapping(path ="/")
-    public ResponseEntity<?> createReclamo(@RequestBody ReclamoModel reclamo) throws Exception {
+    public ResponseEntity<?> createReclamo(@RequestBody ReclamoModelDTO reclamoDTO) throws Exception {
+        ReclamoModel reclamo = convertToEntity(reclamoDTO);
         return new ResponseEntity<>(reclamoService.createReclamo(reclamo), HttpStatus.CREATED);
     }
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateReclamo(@RequestBody ReclamoModel reclamo, @PathVariable Long id) throws Exception {
+    public ResponseEntity<?> updateReclamo(@RequestBody ReclamoModelDTO reclamoDTO, @PathVariable Long id) throws Exception {
+        ReclamoModel reclamo = convertToEntity(reclamoDTO);
         return new ResponseEntity<>(reclamoService.updateReclamo(reclamo, id), HttpStatus.OK);
     }
     @GetMapping(path ="/{id}")
@@ -37,5 +52,58 @@ public class ReclamoController {
     @GetMapping(path ="/")
     public List<ReclamoModel> getAllReclamos(){
         return reclamoService.findAllReclamos();
+    }
+
+    public ReclamoModel convertToEntity(ReclamoModelDTO reclamoDTO) throws Exception {
+        if (reclamoDTO.getIdUnidad() != null && reclamoDTO.getIdEspacioComun() != null) {
+            throw new Exception("No se puede crear un reclamo con unidad y espacio comun");
+        }
+        else if (reclamoDTO.getIdUnidad() != null) {
+            ReclamoModel reclamo = new ReclamoModel(
+                    reclamoDTO.getEstado(),
+                    reclamoDTO.getDescripcion(),
+                    this.usuarioService.findUsuarioById(reclamoDTO.getIdUsuario()),
+                    this.edificioService.findEdificioById(reclamoDTO.getIdEdificio()),
+                    this.unidadService.findUnidadById(reclamoDTO.getIdUnidad()),
+                    null
+            );
+            return reclamo;
+        }
+        else {
+            ReclamoModel reclamo = new ReclamoModel(
+                    reclamoDTO.getEstado(),
+                    reclamoDTO.getDescripcion(),
+                    this.usuarioService.findUsuarioById(reclamoDTO.getIdUsuario()),
+                    this.edificioService.findEdificioById(reclamoDTO.getIdEdificio()),
+                    null,
+                    this.espacioComunService.findEspacioComunById(reclamoDTO.getIdEspacioComun())
+            );
+            return reclamo;
+        }
+    }
+
+    public ReclamoModelDTO convertToDTO(ReclamoModel reclamo) {
+        if (reclamo.getUnidad() != null) {
+            ReclamoModelDTO reclamoDTO = new ReclamoModelDTO(
+                    reclamo.getEstado(),
+                    reclamo.getDescripcion(),
+                    reclamo.getUsuario().getIdUsuario(),
+                    reclamo.getEdificio().getIdEdificio(),
+                    reclamo.getUnidad().getIdUnidad(),
+                    null
+            );
+            return reclamoDTO;
+        }
+        else {
+            ReclamoModelDTO reclamoDTO = new ReclamoModelDTO(
+                    reclamo.getEstado(),
+                    reclamo.getDescripcion(),
+                    reclamo.getUsuario().getIdUsuario(),
+                    reclamo.getEdificio().getIdEdificio(),
+                    null,
+                    reclamo.getEspacioComun().getIdEspacioComun()
+            );
+            return reclamoDTO;
+        }
     }
 }
