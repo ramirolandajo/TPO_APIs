@@ -16,11 +16,9 @@ public class UnidadModel {
     private Long idUnidad;
     private int piso;
     private int numero;
-    @OneToOne
-    @PrimaryKeyJoinColumn()
+    @ManyToOne
     private UsuarioModel duenio;
-    @OneToOne
-    @PrimaryKeyJoinColumn()
+    @ManyToOne
     private UsuarioModel inquilino;
     @ManyToOne
     @JoinColumn(name = "idEdificio")
