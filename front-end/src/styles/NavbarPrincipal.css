@@ -1,0 +1,57 @@
+.navbar {
+    width: 100%;
+    height: 6em;
+    background-color: 	#191716;
+    display: flex;
+    flex-direction: row;
+    padding-left: 3em;
+    box-shadow: 3px 7px 5px 5px #cacaca;
+    font-size: 1.25em;
+}   
+
+.navbar .leftSide {
+    flex: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    color: aliceblue;
+}
+
+.title {
+    padding-left: 0.5em;
+}
+
+.navbar .rightSide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3em;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 1em;
+}
+
+/* Estilo predeterminado del enlace */
+.navbarLink {
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    position: relative; /* Permite posicionar el pseudo-elemento con respecto al enlace */
+}
+
+.navbarLink::before {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0; /* Inicialmente, el ancho es 0 para que no sea visible */
+    height: 2px;
+    background-color: #007bff;
+    transition: width 0.3s ease; /* Agrega una transición de 0.3 segundos en la propiedad width */
+}
+
+.navbarLink:hover::before {
+    width: 100%; /* Al pasar el ratón sobre el enlace, aumenta el ancho al 100% */
+}

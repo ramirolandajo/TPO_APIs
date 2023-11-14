@@ -1,9 +1,10 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  font-family: 'Roboto';
 }
 
 .wrapper {
   display: grid;
   place-content: center;
-  height: 80vh;
 }
