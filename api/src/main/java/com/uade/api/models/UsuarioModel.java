@@ -17,6 +17,6 @@ public class UsuarioModel {
     private String password;
     private String cuil;
     private String nombreCompleto;
-    private TipoUsuario tipoUsuario;
+    private String tipoUsuario;
 
 }

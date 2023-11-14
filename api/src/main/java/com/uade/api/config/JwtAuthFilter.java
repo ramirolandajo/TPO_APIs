@@ -1,11 +1,16 @@
 package com.uade.api.config;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.crypto.SecretKey;
 
+import com.uade.api.models.TipoUsuario;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -32,10 +37,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             if (token != null && validateToken(token)) {
                 String username = extractUsernameFromToken(token);
+                List<GrantedAuthority> authorities = extractRoleFromToken(token);
 
                 if (username != null) {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                            username, null, null);
+                            username, null, authorities);
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -91,7 +97,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         return expirationDate != null && !expirationDate.before(new Date());
     }
 
-    public String extractUsernameFromToken(String token) {
+    private String extractUsernameFromToken(String token) {
         try {
 //            Claims claims = Jwts.parser().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
             Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
@@ -102,12 +108,21 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             // Manejar cualquier excepción que pueda ocurrir al analizar el token
             this.logger.error("Could not extract username from token");
+            System.out.println(e.getMessage());
             return null;
         }
     }
-
-    public Claims excractClaimsFromToken(String token) {
-        Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
-        return claims;
+    private List<GrantedAuthority> extractRoleFromToken(String token) {
+        try {
+            Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
+            String rol = claims.get("rol", String.class);
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(rol));
+            return authorities;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }

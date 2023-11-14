@@ -7,7 +7,7 @@ import Link from '@mui/material/Link';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center">
+    <Typography variant="body2" color="text.secondary" align="center" sx={{paddingBlockStart: '1em'}}>
       {'Copyright © '}
       <Link color="inherit" href="/">
         Pisos Picados
@@ -22,8 +22,8 @@ function Footer(props) {
   const { description, title } = props;
 
   return (
-    <div className='footer'>
-      <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6 }}>
+    <footer className='footer'>
+      <Box component="footer" sx={{ bgcolor: '#EEEEEE', py: 4, position: 'absolute', bottom: 0, width: '100vw' }}>
         <Container maxWidth="lg">
           <Typography variant="h5" align="center" gutterBottom>
             {title}
@@ -36,10 +36,10 @@ function Footer(props) {
           >
             {description}
           </Typography>
-          <Copyright />
+          <Copyright/>
         </Container>
       </Box>
-    </div>
+    </footer>
   );
 }
 

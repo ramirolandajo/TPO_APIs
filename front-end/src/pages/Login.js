@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import PersonIcon from '@mui/icons-material/Person';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import '../styles/Login.css'
 import NavbarPrincipal from '../components/NavbarPrincipal';
 
 const defaultTheme = createTheme();
@@ -37,10 +36,6 @@ export default function SignIn() {
     setContraseña(event.target.value);
   }
 
-  function handleSubmit1(event){
-    event.preventDefault();
-  }
-
   return (
     <div>
       <div className='main'>
@@ -60,7 +55,7 @@ export default function SignIn() {
               <Typography component="h1" variant="h5">
                 Inicio de sesión
               </Typography>
-              <Box component="form" onSubmit={handleSubmit1} noValidate sx={{ mt: 1 }}>
+              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
