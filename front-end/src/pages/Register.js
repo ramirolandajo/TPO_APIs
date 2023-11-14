@@ -11,9 +11,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PersonIcon from '@mui/icons-material/Person';
-import NavbarPrincipal from '../components/NavbarPrincipal';
 import Dropdown from '../components/UserTypeDropdown';
 import "../styles/Register.css";
+import NavbarRegistro from '../components/NavbarInicioSesion';
 
 const defaultTheme = createTheme();
 
@@ -30,7 +30,7 @@ export default function SignUp() {
 
   return (
     <div className='registro'>
-      <NavbarPrincipal />
+      <NavbarRegistro />
       <div className='main'>
         <ThemeProvider theme={defaultTheme}>
           <Container component="main" maxWidth="xs">

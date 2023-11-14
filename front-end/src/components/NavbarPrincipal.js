@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import "../styles/NavbarPrincipal.css";
+import "../styles/Navbar.css";
 import ApartmentIcon from '@mui/icons-material/Apartment';
 
 export default function NavbarPrincipal() {
@@ -13,7 +13,6 @@ export default function NavbarPrincipal() {
           </Link>
         </div>
         <div className='rightSide'>
-            <Link to={"/"} className='navbarLink'>Home</Link>
             <Link to={"/login"} className='navbarLink'>Inicio de sesión</Link>
             <Link to={"/registro"} className='navbarLink'>Registrarse</Link>
         </div>

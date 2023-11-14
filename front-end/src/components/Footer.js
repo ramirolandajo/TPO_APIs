@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import '../styles/Footer.css';
 
 function Copyright() {
   return (
@@ -23,7 +24,7 @@ function Footer(props) {
 
   return (
     <footer className='footer'>
-      <Box component="footer" sx={{ bgcolor: '#EEEEEE', py: 4, position: 'absolute', bottom: 0, width: '100vw' }}>
+      <Box component="footer" sx={{ bgcolor: '#EEEEEE'}}>
         <Container maxWidth="lg">
           <Typography variant="h5" align="center" gutterBottom>
             {title}
