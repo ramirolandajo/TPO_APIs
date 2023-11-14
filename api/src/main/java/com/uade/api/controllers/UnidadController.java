@@ -1,6 +1,7 @@
 package com.uade.api.controllers;
 
 import com.uade.api.models.DTOs.UnidadModelDTO;
+import com.uade.api.models.ReclamoModel;
 import com.uade.api.models.UnidadModel;
 import com.uade.api.services.EdificioService;
 import com.uade.api.services.UnidadService;
@@ -27,21 +28,37 @@ public class UnidadController {
     private EdificioService edificioService;
 
     @PostMapping(path = "/")
-    public ResponseEntity<?> createUnidad(@RequestBody UnidadModelDTO unidadDTO) throws Exception {
-        UnidadModel unidad = convertToEntity(unidadDTO);
-        return new ResponseEntity<>(unidadService.createUnidad(unidad), HttpStatus.OK);
+    public ResponseEntity<?> createUnidad(@RequestBody UnidadModelDTO unidadDTO) {
+        try {
+            UnidadModel unidad = convertToEntity(unidadDTO);
+            return new ResponseEntity<>(unidadService.createUnidad(unidad), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateUnidad(@RequestBody UnidadModelDTO unidadDTO, @PathVariable Long id) throws Exception {
-        UnidadModel unidad = convertToEntity(unidadDTO);
-        return new ResponseEntity<>(unidadService.updateUnidad(unidad, id), HttpStatus.OK);
+    public ResponseEntity<?> updateUnidad(@RequestBody UnidadModelDTO unidadDTO, @PathVariable Long id) {
+        try {
+            UnidadModel unidad = convertToEntity(unidadDTO);
+            return new ResponseEntity<>(unidadService.updateUnidad(unidad, id), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
     }
     @GetMapping(path ="/{id}")
-    public ResponseEntity<?> getUnidadById(@PathVariable Long id) throws Exception {
-        UnidadModel unidad = unidadService.findUnidadById(id);
-        UnidadModelDTO unidadDTO = convertToDTO(unidad);
-        return new ResponseEntity<>(unidadDTO, HttpStatus.OK);
+    public ResponseEntity<?> getUnidadById(@PathVariable Long id) {
+        try {
+            UnidadModel unidad = unidadService.findUnidadById(id);
+            UnidadModelDTO unidadDTO = convertToDTO(unidad);
+            return new ResponseEntity<>(unidadDTO, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+
     }
     @GetMapping(path ="/")
     public List<UnidadModelDTO> getAllUnidades(){

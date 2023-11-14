@@ -16,19 +16,28 @@ import java.util.List;
 public class EspacioComunController {
     @Autowired
     private EspacioComunService espacioComunService;
-
     @Autowired
     private EdificioService edificioService;
 
     @PostMapping(path ="/")
-    public ResponseEntity<?> createEspacioComun(@RequestBody EspacioComunDTO espacioComunDTO) throws Exception {
-        EspacioComunModel espacioComun = convertToEntity(espacioComunDTO);
-        return new ResponseEntity<>(espacioComunService.createEspacioComun(espacioComun), HttpStatus.CREATED);
+    public ResponseEntity<?> createEspacioComun(@RequestBody EspacioComunDTO espacioComunDTO) {
+        try {
+            EspacioComunModel espacioComun = convertToEntity(espacioComunDTO);
+            return new ResponseEntity<>(espacioComunService.createEspacioComun(espacioComun), HttpStatus.CREATED);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
     }
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateEspacioComun(@RequestBody EspacioComunDTO espacioComunDTO, @PathVariable Long id) throws Exception {
-        EspacioComunModel espacioComun = convertToEntity(espacioComunDTO);
-        return new ResponseEntity<>(espacioComunService.updateEspacioComun(espacioComun, id), HttpStatus.OK);
+    public ResponseEntity<?> updateEspacioComun(@RequestBody EspacioComunDTO espacioComunDTO, @PathVariable Long id) {
+        try {
+            EspacioComunModel espacioComun = convertToEntity(espacioComunDTO);
+            return new ResponseEntity<>(espacioComunService.updateEspacioComun(espacioComun, id), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
     }
     @GetMapping(path ="/{id}")
     public ResponseEntity<?> getEspacioComunById(@PathVariable Long id) throws Exception {

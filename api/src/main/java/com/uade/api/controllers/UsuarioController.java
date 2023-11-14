@@ -15,17 +15,32 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
     @PostMapping(path ="/register")
-    public ResponseEntity<?> registerUsuario(@RequestBody UsuarioModel user) throws Exception {
-        return new ResponseEntity<>(usuarioService.createUsuario(user), HttpStatus.CREATED);
+    public ResponseEntity<?> registerUsuario(@RequestBody UsuarioModel user){
+        try {
+            return new ResponseEntity<>(usuarioService.createUsuario(user), HttpStatus.CREATED);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
     }
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateUsuario(@RequestBody UsuarioModel user, @PathVariable Long id) throws Exception {
-        return new ResponseEntity<>(usuarioService.updateUsuario(user, id), HttpStatus.OK);
+    public ResponseEntity<?> updateUsuario(@RequestBody UsuarioModel user, @PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(usuarioService.updateUsuario(user, id), HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
     }
     @GetMapping(path ="/{id}")
-    public ResponseEntity<?> getUsuarioById(@PathVariable Long id) throws Exception {
-        UsuarioModel user = usuarioService.findUsuarioById(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<?> getUsuarioById(@PathVariable Long id) {
+        try {
+            UsuarioModel user = usuarioService.findUsuarioById(id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
     }
     @GetMapping(path ="/")
     public List<UsuarioModel> getAllUsuarios(){

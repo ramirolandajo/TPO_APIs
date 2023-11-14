@@ -105,4 +105,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return null;
         }
     }
+
+    public Claims excractClaimsFromToken(String token) {
+        Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
+        return claims;
+    }
 }
