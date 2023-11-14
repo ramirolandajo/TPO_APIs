@@ -1,0 +1,24 @@
+*{
+    font-family: 'Roboto';
+}
+
+.mainDashboardHome{
+    display: block;
+    text-align: center;
+    margin: 2em;
+}
+
+.mainDashboardEdificio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 39em;
+}
+
+.caja{
+    text-align: center;
+}
+
+h2{
+    margin: 10px;
+}

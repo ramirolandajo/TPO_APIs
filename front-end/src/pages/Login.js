@@ -13,6 +13,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavbarInicioSesion from '../components/NavbarInicioSesion.js';
 import '../styles/InicioSesion.css'
+import { useNavigate } from 'react-router';
 
 const defaultTheme = createTheme();
 
@@ -29,18 +30,23 @@ export default function SignIn() {
   const [usuario, setUsuario] = React.useState("");
   const [contraseña, setContraseña] = React.useState("");
 
-  function handleUsuarioChange(event){
+  function handleUsuarioChange(event) {
     setUsuario(event.target.value);
   }
 
-  function handleContraseñaChange(event){
+  function handleContraseñaChange(event) {
     setContraseña(event.target.value);
   }
 
+  const nav = useNavigate();
+
+  function navegar() {
+    nav('/AdminDashboard')
+  }
+
   return (
-    <div>
       <div className='main'>
-        <NavbarInicioSesion/>
+        <NavbarInicioSesion />
         <ThemeProvider theme={defaultTheme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -52,7 +58,7 @@ export default function SignIn() {
                 alignItems: 'center',
               }}
             >
-              <PersonIcon fontSize='large' className='personIcon' color='primary'/>
+              <PersonIcon fontSize='large' className='personIcon' color='primary' />
               <Typography component="h1" variant="h5">
                 Inicio de sesión
               </Typography>
@@ -90,8 +96,9 @@ export default function SignIn() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  onClick={navegar}
                 >
-                  Registrarse
+                  Iniciar Sesión
                 </Button>
                 <Grid container>
                   <Grid item xs>
@@ -110,6 +117,5 @@ export default function SignIn() {
           </Container>
         </ThemeProvider>
       </div>
-    </div>
   );
 }
