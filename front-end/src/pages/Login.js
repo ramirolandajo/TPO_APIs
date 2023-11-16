@@ -18,24 +18,21 @@ import { useNavigate } from 'react-router';
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+
+  // const [jwt, setJwt] = React.useContext(myContext);
+  const [usuario, setUsuario] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-    });
+    // const data = {usuario, password}
   };
-
-  const [usuario, setUsuario] = React.useState("");
-  const [contraseña, setContraseña] = React.useState("");
-
   function handleUsuarioChange(event) {
     setUsuario(event.target.value);
   }
 
   function handleContraseñaChange(event) {
-    setContraseña(event.target.value);
+    setPassword(event.target.value);
   }
 
   const nav = useNavigate();
@@ -79,11 +76,11 @@ export default function SignIn() {
                   margin="normal"
                   required
                   fullWidth
-                  name="contraseña"
+                  name="password"
                   label="Contraseña"
-                  type="Contraseña"
+                  type="password"
                   id="contraseña"
-                  value={contraseña}
+                  value={password}
                   onChange={handleContraseñaChange}
                   autoComplete="contraseña recurrente"
                 />

@@ -1,22 +1,20 @@
 import '../styles/AdminDashboard.css';
 import NabvarAdminDashboard from '../components/NabvarAdminDashboardHome';
-import { useNavigate } from 'react-router';
+import PopupEdificio from '../components/PopupEdificio';
+import PopupUnidad from '../components/PopupUnidad';
+import PopupEspacioComun from '../components/PopupEspacioComun';
 
 export default function AdminDashboard() {
-
-  const nav = useNavigate();
-
-  function navegar() {
-    nav('/AdminDashboard/edificio')
-  }
 
   return (
     <div className='main'>
       <NabvarAdminDashboard/>
       <div className='mainDashboardHome'>
-        <h1>Hola</h1>
-        <div>
-          <button onClick={navegar}>Crear edificio</button>
+        <h1>Bienvenido al dashboard de Admin</h1>
+        <div className='button-wrapper'>
+          <PopupEdificio/>
+          <PopupUnidad/>
+          <PopupEspacioComun/>
         </div>
       </div>
     </div>
