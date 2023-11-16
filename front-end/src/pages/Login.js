@@ -19,14 +19,36 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
 
-  // const [jwt, setJwt] = React.useContext(myContext);
   const [usuario, setUsuario] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const nav = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // const data = {usuario, password}
-  };
+  function navegar() {
+    nav('/AdminDashboard')
+  }
+
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      const data = {usuario, password}
+      console.log(data);
+      const response = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) {
+        throw new Error("Error en el login")
+      }
+      const token = await response.text()
+      localStorage.setItem('token', token)
+      navegar()
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
   function handleUsuarioChange(event) {
     setUsuario(event.target.value);
   }
@@ -35,11 +57,7 @@ export default function SignIn() {
     setPassword(event.target.value);
   }
 
-  const nav = useNavigate();
 
-  function navegar() {
-    nav('/AdminDashboard')
-  }
 
   return (
       <div className='main'>
@@ -93,7 +111,7 @@ export default function SignIn() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={navegar}
+                  onClick={handleSubmit}
                 >
                   Iniciar Sesión
                 </Button>

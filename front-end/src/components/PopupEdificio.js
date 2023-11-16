@@ -11,6 +11,10 @@ import { crearEdificio } from './createBuilding';
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
 
+  async function handleSubmit(){
+
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };

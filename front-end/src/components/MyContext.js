@@ -4,7 +4,7 @@ const myContext = createContext();
 
 const MyProvider = ({children}) => {
   
-    const [jwt, setJwt] = React.useState('');
+    const [jwt, setJwt] = React.useState();
   
     return (
     <myContext.Provider value={{jwt,setJwt}}>

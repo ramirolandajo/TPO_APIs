@@ -24,7 +24,7 @@ function Footer(props) {
 
   return (
     <footer className='footer'>
-      <Box component="footer" sx={{ bgcolor: '#EEEEEE', position: 'absolute', bottom: 0, width: '100vw', py: 2}}>
+      <Box component="footer" sx={{ bgcolor: '#EEEEEE', py: 2}}>
         <Container maxWidth="lg">
           <Typography variant="h5" align="center" gutterBottom>
             {title}
