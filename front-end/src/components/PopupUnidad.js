@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { crearEdificio } from './createBuilding';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -17,6 +18,20 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const cargaEdificio = () => {
+    // Tomo valor    
+    // Componente para crear edificio
+    const crearUnidad = crearEdificio('unidad');
+
+    if(crearUnidad){
+        // Cierro        
+        handleClose();
+    }else{
+      alert("NO se pudo ingresar la informacion");
+      return false;
+    }
+  }
 
   return (
     <React.Fragment>
@@ -77,7 +92,7 @@ export default function FormDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose}>Crear</Button>
+          <Button onClick={cargaEdificio}>Crear</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

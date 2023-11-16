@@ -1,3 +1,4 @@
+import React from 'react';
 import '../styles/AdminDashboard.css';
 import NabvarAdminDashboard from '../components/NabvarAdminDashboardHome';
 import PopupEdificio from '../components/PopupEdificio';
