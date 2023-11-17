@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import PersonIcon from '@mui/icons-material/Person';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import NavbarInicioSesion from '../components/NavbarInicioSesion.js';
+import NavbarInicioSesion from '../components/Navbars/NavbarInicioSesion.js';
 import '../styles/InicioSesion.css'
 import { useNavigate } from 'react-router';
 

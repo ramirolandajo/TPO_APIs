@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import "../styles/Navbar.css";
+import "../../styles/Navbar.css";
 import ApartmentIcon from '@mui/icons-material/Apartment';
 
 function NavbarRegistro() {
@@ -10,9 +10,10 @@ function NavbarRegistro() {
          <ApartmentIcon sx={{width: '2em', height: '2em'}}/>
           <Link to={"/"}>
             <h2 className='title'>Pisos Picados</h2>
-          </Link></div>
+          </Link>
+        </div>
         <div className='rightSide'>
-            <Link to={"/"} className='navbarLink'>Volver</Link>
+            <Link to={"/"} className='navbarLink'>Home</Link>
         </div>
     </div>
   )

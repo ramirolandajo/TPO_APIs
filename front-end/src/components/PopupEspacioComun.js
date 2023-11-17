@@ -10,6 +10,34 @@ import { crearEdificio } from './createBuilding';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [piso, setPiso] = React.useState('');
+  const [descripcion, setDescripcion] = React.useState('');
+  const [idEdificio, setIdEdificio] = React.useState('');
+
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
+      const data = {piso, descripcion, idEdificio}
+      const token = localStorage.getItem('token')
+      const authHeader = "Bearer " + token
+      const response = await fetch("http://localhost:8080/tpo_apis/espacios_comunes/",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": authHeader  
+        },
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) {
+        throw new Error("Error creando la unidad")
+      }
+      console.log("La unidad ha sido creada con exito!")
+      console.log(await response.json())
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,19 +47,19 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  const cargaEdificio = () => {
-    // Tomo valor    
-    // Componente para crear edificio
-    const crearEspacio = crearEdificio('espacioComun');
+  // const cargaEdificio = () => {
+  //   // Tomo valor    
+  //   // Componente para crear edificio
+  //   const crearEspacio = crearEdificio('espacioComun');
 
-    if(crearEspacio){
-        // Cierro        
-        handleClose();
-    }else{
-      alert("NO se pudo ingresar la informacion");
-      return false;
-    }
-  }
+  //   if(crearEspacio){
+  //       // Cierro        
+  //       handleClose();
+  //   }else{
+  //     alert("NO se pudo ingresar la informacion");
+  //     return false;
+  //   }
+  // }
 
   return (
     <React.Fragment>
@@ -48,33 +76,39 @@ export default function FormDialog() {
             autoFocus
             margin="dense"
             id="idEdificio"
-            label="Direccion Edificio"
+            label="Id del Edificio"
             type="number"
             fullWidth
             variant="standard"
+            value={idEdificio}
+            onChange={(e)=>setIdEdificio(e.target.value)}
           />
           <TextField
             autoFocus
             margin="dense"
             id="piso"
-            label="Piso del Espacio Comun"
+            label="Piso"
             type="number"
             fullWidth
             variant="standard"
+            value={piso}
+            onChange={(e)=>setPiso(e.target.value)}
           />
           <TextField
             autoFocus
             margin="dense"
             id="descripcion"
-            label="Descripcion del Espacio Comun"
+            label="Descripcion"
             type="text"
             fullWidth
             variant="standard"
+            value={descripcion}
+            onChange={(e)=>setDescripcion(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={cargaEdificio}>Crear</Button>
+          <Button onClick={handleSubmit}>Crear</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

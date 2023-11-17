@@ -5,10 +5,10 @@ import com.uade.api.services.EdificioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path ="tpo_apis/edificios")
 public class EdificioController {
@@ -16,7 +16,7 @@ public class EdificioController {
     @Autowired
     private EdificioService edificioService;
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(path ="/")
     public ResponseEntity<?> createEdificio(@RequestBody EdificioModel edificio) {
         try {

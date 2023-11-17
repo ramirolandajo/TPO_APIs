@@ -18,7 +18,10 @@ public class TpoApiApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedOrigins("http://localhost:3000")
-						.allowedMethods("GET", "POST", "PUT", "DELETE");
+						.allowedMethods("GET", "POST", "PUT", "DELETE")
+						.allowedHeaders("Authorization", "Content-Type")
+						.exposedHeaders("Authorization")
+						.allowCredentials(true);
 			}
 		};
 	}

@@ -5,7 +5,6 @@ import Home from './pages/Home'
 import Register from './pages/Register';
 import Error404 from './pages/Error404';
 import Footer from './components/Footer';
-import MyContext from './components/MyContext';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 import AdminDashboardHome from './pages/AdminDashboardHome';
 import AdminDashboardEdificio from './pages/AdminDashboardEdificio';

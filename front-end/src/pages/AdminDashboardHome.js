@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/AdminDashboard.css';
-import NabvarAdminDashboard from '../components/NabvarAdminDashboardHome';
+import NabvarAdminDashboard from '../components/Navbars/NabvarAdminDashboardHome';
 import PopupEdificio from '../components/PopupEdificio';
 import PopupUnidad from '../components/PopupUnidad';
 import PopupEspacioComun from '../components/PopupEspacioComun';

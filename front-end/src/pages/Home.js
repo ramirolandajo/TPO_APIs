@@ -1,5 +1,6 @@
-import NavbarPrincipal from '../components/NavbarPrincipal';
+import NavbarPrincipal from '../components/Navbars/NavbarPrincipal';
 import React from 'react';
+import Background from '../components/Background';
 import '../styles/Home.css'
 
 export default function Home() {
@@ -7,15 +8,7 @@ export default function Home() {
   return (
     <div className='home'>
       <NavbarPrincipal/>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <Background/>
     </div>
   )
 }

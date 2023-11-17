@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import "../styles/Navbar.css";
+import "../../styles/Navbar.css"
 import ApartmentIcon from '@mui/icons-material/Apartment';
 
 export default function NavbarPrincipal() {

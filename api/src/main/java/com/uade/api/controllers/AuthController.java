@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-@CrossOrigin()
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

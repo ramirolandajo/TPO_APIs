@@ -1,12 +1,12 @@
 export function crearEdificio(valor){
 
-    if(valor == 'edificio'){
+    if(valor === 'edificio'){
 
         let inputEdificio = document.getElementById("direccion-edificio").value;
         alert("Desde createBuilding " + inputEdificio);
                 
         return true
-    }else if(valor == 'unidad'){
+    }else if(valor === 'unidad'){
 
         let piso        = document.getElementById("piso").value;
         let numero      = document.getElementById("numero").value;
@@ -22,7 +22,7 @@ export function crearEdificio(valor){
 
 
         return true;
-    }else if(valor == 'espacioComun'){
+    }else if(valor === 'espacioComun'){
 
         let direccionEdificio = document.getElementById("idEdificio").value;
         let piso              = document.getElementById("piso").value;

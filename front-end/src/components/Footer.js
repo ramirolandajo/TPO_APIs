@@ -4,11 +4,10 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import '../styles/Footer.css';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" sx={{paddingBlockStart: '1em'}}>
+    <Typography variant="body2" color="text.secondary" align="center" sx={{paddingBlockStart: '1em', color: 'white'}}>
       {'Copyright © '}
       <Link color="inherit" href="/">
         Pisos Picados
@@ -24,7 +23,7 @@ function Footer(props) {
 
   return (
     <footer className='footer'>
-      <Box component="footer" sx={{ bgcolor: '#EEEEEE', py: 2}}>
+      <Box component="footer" sx={{ bgcolor: 'transparent', py: 2, position: 'fixed', bottom: 0, width: '100vw', color: 'white'}}>
         <Container maxWidth="lg">
           <Typography variant="h5" align="center" gutterBottom>
             {title}
@@ -32,7 +31,7 @@ function Footer(props) {
           <Typography
             variant="subtitle1"
             align="center"
-            color="text.secondary"
+            color="white"
             component="p"
           >
             {description}

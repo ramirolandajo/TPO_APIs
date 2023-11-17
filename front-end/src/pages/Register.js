@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PersonIcon from '@mui/icons-material/Person';
 import Dropdown from '../components/UserTypeDropdown';
 import "../styles/Register.css";
-import NavbarRegistro from '../components/NavbarInicioSesion';
+import NavbarRegistro from '../components/Navbars/NavbarInicioSesion';
 
 const defaultTheme = createTheme();
 
