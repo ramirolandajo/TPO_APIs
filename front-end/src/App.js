@@ -21,7 +21,6 @@ function App() {
             <Route path='/AdminDashboard/edificio' exact Component={AdminDashboardEdificio}/>
             <Route path='*' exact Component={Error404}/>
           </Routes>
-          <Footer description={'Aplicacion Web para el manejo de reclamos sobre distintas unidades en un conjunto de edificios'} title={'Pisos Picados'}/>
         </Router>
       </div>
   );

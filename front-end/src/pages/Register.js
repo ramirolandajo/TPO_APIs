@@ -11,20 +11,42 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PersonIcon from '@mui/icons-material/Person';
-import Dropdown from '../components/UserTypeDropdown';
-import "../styles/Register.css";
+import { InputLabel, Select, MenuItem, FormControl } from '@mui/material';
 import NavbarRegistro from '../components/Navbars/NavbarInicioSesion';
+import "../styles/Register.css";
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('usuario'),
-      password: data.get('contraseña'),
-    });
+export default function Register() {
+
+  const [nombre, setNombre] = React.useState('');
+  const [apellido, setApellido] = React.useState('');
+  const [cuil, setCuil] = React.useState('');
+  const [usuario, setUsuario] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [tipoUsuario, setTipoUsuario] = React.useState('');
+
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      const nombreCompleto = nombre + " " + apellido
+      const data = {usuario, password, cuil, nombreCompleto, tipoUsuario}
+      console.log(data)
+      const response = await fetch("http://localhost:8080/tpo_apis/usuarios/signUp",{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) {
+        throw new Error("Error en el registro de usuarios")
+      }
+      console.log("Usuario registrado con exito!")
+      console.log(await response.json())
+    }
+    catch (error) {
+      console.error(error);
+    }
+
   };
 
 
@@ -58,6 +80,8 @@ export default function SignUp() {
                       id="nombre"
                       label="Nombre"
                       autoFocus
+                      value={nombre}
+                      onChange={(e)=>setNombre(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -68,6 +92,8 @@ export default function SignUp() {
                       label="Apellido"
                       name="apellido"
                       autoComplete="family-name"
+                      value={apellido}
+                      onChange={(e)=>setApellido(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -79,6 +105,8 @@ export default function SignUp() {
                       type="cuil"
                       id="cuil"
                       autoComplete="cuil"
+                      value={cuil}
+                      onChange={(e)=>setCuil(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -89,21 +117,40 @@ export default function SignUp() {
                       label="Usuario"
                       name="usuario"
                       autoComplete="usuario"
+                      value={usuario}
+                      onChange={(e)=>setUsuario(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
                       required
                       fullWidth
-                      name="contraseña"
+                      name="password"
                       label="Contraseña"
-                      type="contraseña"
-                      id="contraseña"
-                      autoComplete="nueva-comtraseña"
+                      type="password"
+                      id="password"
+                      autoComplete="nueva-contraseña"
+                      value={password}
+                      onChange={(e)=>setPassword(e.target.value)}
                     />
                   </Grid>
                   <Grid item cs={12}>
-                    <Dropdown/>
+                    {/* <Dropdown/> */}
+                    <Box sx={{ minWidth: 400 }}>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Tipo de Usuario</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          value={tipoUsuario}
+                          label="Tipo de Usuario"
+                          onChange={(e)=>setTipoUsuario(e.target.value)}
+                        >
+                          <MenuItem value={"DUENIO"}>Dueño</MenuItem>
+                          <MenuItem value={"INQUILINO"}>Inquilino</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>
                   </Grid>
                   <Grid item xs={12}>
                     <FormControlLabel

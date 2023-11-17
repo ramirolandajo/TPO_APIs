@@ -10,16 +10,19 @@
     font-family: 'Kanit', sans-serif;
     line-height: 0px;
     text-transform: uppercase;
+
   }
   
   .number {
     font-size: 300px;
     color: #545864;
+
   }
   
   .number span {
     display: inline-block;
     position: relative;
+    font-size: 0.75em;
   }
   
   .slopeBegin {
@@ -49,8 +52,4 @@
   
   .tomato {
     background: linear-gradient(to right, tomato 0%, gold 100%);
-  }
-
-  .span {
-    font-size: 200px;
   }

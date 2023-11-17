@@ -8,13 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("tpo_apis/usuarios")
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
-    @PostMapping(path ="/register")
+    @PostMapping(path ="/signUp")
     public ResponseEntity<?> registerUsuario(@RequestBody UsuarioModel user){
         try {
             return new ResponseEntity<>(usuarioService.createUsuario(user), HttpStatus.CREATED);
