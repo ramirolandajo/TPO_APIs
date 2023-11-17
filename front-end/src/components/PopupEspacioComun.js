@@ -20,7 +20,7 @@ export default function FormDialog() {
       const data = {piso, descripcion, idEdificio}
       const token = localStorage.getItem('token')
       const authHeader = "Bearer " + token
-      const response = await fetch("http://localhost:8080/tpo_apis/espacios_comunes/",{
+      const response = await fetch("/tpo_apis/espacios_comunes/",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

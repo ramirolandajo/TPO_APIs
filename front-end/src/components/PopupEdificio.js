@@ -19,13 +19,11 @@ export default function FormDialog() {
       console.log(data);
       const token = localStorage.getItem('token')
       console.log(token);
-      const authHeader = "Bearer " + token
-      console.log(authHeader)
-      const response = await fetch("http://localhost:8080/tpo_apis/edificios/", {
+      const response = await fetch("/tpo_apis/edificios/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": authHeader
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(data)
       })

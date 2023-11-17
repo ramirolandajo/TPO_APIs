@@ -32,7 +32,7 @@ export default function Register() {
       const nombreCompleto = nombre + " " + apellido
       const data = {usuario, password, cuil, nombreCompleto, tipoUsuario}
       console.log(data)
-      const response = await fetch("http://localhost:8080/tpo_apis/usuarios/signUp",{
+      const response = await fetch("/tpo_apis/usuarios/signUp",{
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
