@@ -19,19 +19,18 @@ export default function FormDialog() {
       event.preventDefault();
       const data = {piso, descripcion, idEdificio}
       const token = localStorage.getItem('token')
-      const authHeader = "Bearer " + token
       const response = await fetch("/tpo_apis/espacios_comunes/",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": authHeader  
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(data)
       })
       if (!response.ok) {
         throw new Error("Error creando la unidad")
       }
-      console.log("La unidad ha sido creada con exito!")
+      console.log("El espacio comun ha sido creado con exito!")
       console.log(await response.json())
     }
     catch (error) {

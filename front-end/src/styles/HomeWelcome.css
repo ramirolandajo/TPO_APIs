@@ -1,0 +1,27 @@
+.waviy {
+    position: relative;
+    margin: 1em;
+    width: fit-content;
+    -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2));
+    font-size: 60px;
+}
+
+.letter {
+    font-family: 'Righteous', sans-serif;
+    position: relative;
+    display: inline-block;
+    color: #000000;
+    text-transform: uppercase;
+    animation: waviy 5s infinite;
+    animation-delay: calc(.5s * var(--i));
+    font-size: 2em;
+}
+
+@keyframes waviy {
+    0%,40%,100% {
+        transform: translateY(0)
+    }
+    20% {
+        transform: translateY(-20px)
+    }
+}

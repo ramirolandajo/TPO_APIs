@@ -7,7 +7,6 @@ import Error404 from './pages/Error404';
 import Footer from './components/Footer';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 import AdminDashboardHome from './pages/AdminDashboardHome';
-import AdminDashboardEdificio from './pages/AdminDashboardEdificio';
 
 function App() {
   return (
@@ -18,10 +17,10 @@ function App() {
             <Route path='/login' exact Component={Login}/>
             <Route path='/registro' exact Component={Register}/>
             <Route path='/AdminDashboard' exact Component={AdminDashboardHome}/>
-            <Route path='/AdminDashboard/edificio' exact Component={AdminDashboardEdificio}/>
             <Route path='*' exact Component={Error404}/>
           </Routes>
         </Router>
+        <Footer title={"Pisos Picados"}/>
       </div>
   );
 }

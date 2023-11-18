@@ -83,4 +83,10 @@
   .navbarLink:hover::before {
     width: 100%; /* Al pasar el ratón sobre el enlace, aumenta el ancho al 100% */
   }
+
+  .title {
+    font-family: 'Righteous', sans-serif;
+    font-size: 2em;
+    letter-spacing: 3px;
+  }
   

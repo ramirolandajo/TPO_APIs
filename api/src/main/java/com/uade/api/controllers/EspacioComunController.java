@@ -2,7 +2,6 @@ package com.uade.api.controllers;
 
 import com.uade.api.models.DTOs.EspacioComunDTO;
 import com.uade.api.models.EspacioComunModel;
-import com.uade.api.models.EspacioComunModel;
 import com.uade.api.services.EdificioService;
 import com.uade.api.services.EspacioComunService;
 import org.springframework.beans.factory.annotation.Autowired;
