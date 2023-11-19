@@ -23,8 +23,12 @@ export default function SignIn() {
   const [password, setPassword] = React.useState("");
   const nav = useNavigate();
 
-  function navegar() {
+  function navegarAdminDashboard() {
     nav('/AdminDashboard')
+  }
+
+  function navegarUserDashboard() {
+    nav('/UserDashboard')
   }
 
   const handleSubmit = async (event) => {
@@ -42,7 +46,7 @@ export default function SignIn() {
       }
       const token = await response.text()
       localStorage.setItem('token', token)
-      navegar()
+      navegarUserDashboard()
     }
     catch (error) {
       console.error(error);

@@ -6,10 +6,40 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { crearEdificio } from './createBuilding';
+
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [piso, setPiso] = React.useState('');
+  const [numero, setNumero] = React.useState('');
+  const [idEdificio, setIdEdificio] = React.useState('');
+  const [idDuenio, setIdDuenio] = React.useState('');
+  const [idInquilino, setIdInquilino] = React.useState('');
+
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
+      const data = { piso, numero, idDuenio, idInquilino, idEdificio }
+      console.log(data);
+      const token = localStorage.getItem('token')
+      console.log(token);
+      const response = await fetch("/tpo_apis/unidades/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) {
+        throw new Error("Error en la creacion del unidad")
+      }
+      console.log("Unidad Creada!");
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -18,20 +48,6 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const cargaEdificio = () => {
-    // Tomo valor    
-    // Componente para crear edificio
-    const crearUnidad = crearEdificio('unidad');
-
-    if(crearUnidad){
-        // Cierro        
-        handleClose();
-    }else{
-      alert("NO se pudo ingresar la informacion");
-      return false;
-    }
-  }
 
   return (
     <React.Fragment>
@@ -51,6 +67,8 @@ export default function FormDialog() {
             label="Piso"
             type="text"
             fullWidth
+            value={piso}
+            onChange={(e) => setPiso(e.target.value)}
             variant="standard"
           />
           <TextField
@@ -59,24 +77,8 @@ export default function FormDialog() {
             id="numero"
             label="Numero"
             type="number"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="idDuenio"
-            label="Id del Duenio"
-            type="number"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="idInquilino"
-            label="Id del Inquilino"
-            type="number"
+            value={numero}
+            onChange={(e) => setNumero(e.target.value)}
             fullWidth
             variant="standard"
           />
@@ -86,13 +88,37 @@ export default function FormDialog() {
             id="idEdificio"
             label="Id del Edificio"
             type="number"
+            value={idEdificio}
+            onChange={(e) => setIdEdificio(e.target.value)}
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="idDuenio"
+            label="Id del Duenio"
+            type="number"
+            value={idDuenio}
+            onChange={(e) => setIdDuenio(e.target.value)}
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="idInquilino"
+            label="Id del Inquilino"
+            type="number"
+            value={idInquilino}
+            onChange={(e) => setIdInquilino(e.target.value)}
             fullWidth
             variant="standard"
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={cargaEdificio}>Crear</Button>
+          <Button onClick={handleSubmit}>Crear</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

@@ -5,8 +5,9 @@ import Home from './pages/Home'
 import Register from './pages/Register';
 import Error404 from './pages/Error404';
 import Footer from './components/Footer';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 import AdminDashboardHome from './pages/AdminDashboardHome';
+import UserDashboardHome from './pages/UserDashboardHome';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/login' exact Component={Login}/>
             <Route path='/registro' exact Component={Register}/>
             <Route path='/AdminDashboard' exact Component={AdminDashboardHome}/>
+            <Route path='/UserDashboard' exact Component={UserDashboardHome}/>
             <Route path='*' exact Component={Error404}/>
           </Routes>
         </Router>
