@@ -76,7 +76,8 @@ public class ReclamoController {
                     this.usuarioService.findUsuarioById(reclamoDTO.getIdUsuario()),
                     this.edificioService.findEdificioById(reclamoDTO.getIdEdificio()),
                     this.unidadService.findUnidadById(reclamoDTO.getIdUnidad()),
-                    null
+                    null,
+                    reclamoDTO.getImagen()
             );
             return reclamo;
         }
@@ -87,7 +88,8 @@ public class ReclamoController {
                     this.usuarioService.findUsuarioById(reclamoDTO.getIdUsuario()),
                     this.edificioService.findEdificioById(reclamoDTO.getIdEdificio()),
                     null,
-                    this.espacioComunService.findEspacioComunById(reclamoDTO.getIdEspacioComun())
+                    this.espacioComunService.findEspacioComunById(reclamoDTO.getIdEspacioComun()),
+                    reclamoDTO.getImagen()
             );
             return reclamo;
         }
@@ -101,7 +103,8 @@ public class ReclamoController {
                     reclamo.getUsuario().getIdUsuario(),
                     reclamo.getEdificio().getIdEdificio(),
                     reclamo.getUnidad().getIdUnidad(),
-                    null
+                    null,
+                    reclamo.getImagen()
             );
             return reclamoDTO;
         }
@@ -112,7 +115,8 @@ public class ReclamoController {
                     reclamo.getUsuario().getIdUsuario(),
                     reclamo.getEdificio().getIdEdificio(),
                     null,
-                    reclamo.getEspacioComun().getIdEspacioComun()
+                    reclamo.getEspacioComun().getIdEspacioComun(),
+                    reclamo.getImagen()
             );
             return reclamoDTO;
         }

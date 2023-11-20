@@ -1,5 +1,6 @@
 package com.uade.api.models.DTOs;
 
+import com.uade.api.models.ImagenModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class ReclamoModelDTO {
     private Long idEdificio;
     private Long idUnidad;
     private Long idEspacioComun;
-
+    private ImagenModel imagen;
 }
