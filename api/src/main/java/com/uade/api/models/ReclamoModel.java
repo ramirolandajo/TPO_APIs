@@ -15,13 +15,13 @@ public class ReclamoModel {
     private Long idReclamo;
     private String estado;
     private String descripcion;
-    @OneToOne
+    @ManyToOne
     private UsuarioModel usuario;
-    @OneToOne
+    @ManyToOne
     private EdificioModel edificio;
-    @OneToOne
+    @ManyToOne
     private UnidadModel unidad;
-    @OneToOne
+    @ManyToOne
     private EspacioComunModel espacioComun;
     @OneToOne
     private ImagenModel imagen;

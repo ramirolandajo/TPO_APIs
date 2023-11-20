@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavbarInicioSesion from '../components/Navbars/NavbarInicioSesion.js';
 import '../styles/InicioSesion.css'
 import { useNavigate } from 'react-router';
+import { isExpired, decodeToken } from 'react-jwt';
 
 const defaultTheme = createTheme();
 
@@ -21,6 +22,7 @@ export default function SignIn() {
 
   const [usuario, setUsuario] = React.useState("");
   const [password, setPassword] = React.useState("");
+
   const nav = useNavigate();
 
   function navegarAdminDashboard() {
@@ -42,13 +44,24 @@ export default function SignIn() {
         body: JSON.stringify(data)
       })
       if (!response.ok) {
-        throw new Error("Error en el login")
+        throw new Error(await response.text())
       }
       const token = await response.text()
       localStorage.setItem('token', token)
-      navegarUserDashboard()
+      const decodedToken = decodeToken(token);
+
+      if (!isExpired(token)) {
+        console.log(decodedToken)
+        if (decodedToken.rol === "ADMIN") {
+          navegarAdminDashboard();
+        }
+        else {
+          navegarUserDashboard();
+        }
+      }
     }
     catch (error) {
+      alert(error);
       console.error(error);
     }
   }

@@ -9,19 +9,21 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
-  const [direccion, setDireccion] = React.useState('');
   const [creado, setCreado] = React.useState(false);
+
+  const [direccion, setDireccion] = React.useState('');
+
   async function handleSubmit(event) {
     try {
       event.preventDefault();
-      if (direccion === '')  {
-        alert('No se puede crear un edificio sin dirección!')
-        throw new Error('No se puede crear un edificio sin dirección!');
+      if (direccion === '') {
+        alert('Error al crear el edificio (llene los campos necesarios)')
+        throw new Error('Error al crear el edificio (llene los campos necesarios)');
       }
       const data = { direccion }
       console.log(data);
       const token = localStorage.getItem('token')
-      console.log(token);
+      
       const response = await fetch("/tpo_apis/edificios/", {
         method: "POST",
         headers: {
@@ -31,12 +33,13 @@ export default function FormDialog() {
         body: JSON.stringify(data)
       })
       if (!response.ok) {
-        throw new Error("Error en la creacion del edificio")
+        throw new Error(await response.text())
       }
       console.log("Edificio Creado!");
       setCreado(true);
     }
     catch (error) {
+      alert(error)
       console.error(error);
     }
   };
@@ -48,6 +51,7 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
     setCreado(false);
+    setDireccion('');
   };
 
 
@@ -62,9 +66,9 @@ export default function FormDialog() {
             <DialogTitle>Edificio creado</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Edificio creado con éxito! 
+                Edificio creado con éxito!
               </DialogContentText>
-              <Button onClick={handleClose} variant='outlined' sx={{my:2}}>Aceptar</Button>
+              <Button onClick={handleClose} variant='outlined' sx={{ my: 2 }}>Aceptar</Button>
             </DialogContent>
           </div>
         ) :
@@ -96,5 +100,4 @@ export default function FormDialog() {
       </Dialog>
     </React.Fragment>
   );
-  // Cambiar handleClose por validacion y carga de envio
 }

@@ -14,6 +14,7 @@ function NavbarRegistro() {
         </div>
         <div className='rightSide'>
             <Link to={"/"} className='navbarLink'>Home</Link>
+            <Link to={"/login"} className='navbarLink'>Inicio de sesión</Link>
         </div>
     </div>
   )

@@ -61,7 +61,7 @@ public class ReclamoService {
             }
 
             if (newReclamo.getUnidad().getInquilino() == null) {
-                if (!usuarioDb.getTipoUsuario().equals(TipoUsuario.DUENIO)){
+                if (!usuarioDb.getTipoUsuario().equals("DUENIO")){
                     log.error("La unidad no posee inquilino. El usuario que crea el reclamo debe ser de tipo DUENIO");
                     throw new Exception("La unidad no posee inquilino. El usuario que crea el reclamo debe ser de tipo DUENIO");
                 }
@@ -73,15 +73,14 @@ public class ReclamoService {
                     }
                 }
             }
-
-            if (newReclamo.getUnidad().getInquilino() != null) {
-                if (!usuarioDb.getTipoUsuario().equals(TipoUsuario.INQUILINO)){
+            else {
+                if (!usuarioDb.getTipoUsuario().equals("INQUILINO")) {
                     log.error("La unidad posee un inquilino. Solo el usuario de tipo inquilino puede generar el reclamo");
                     throw new Exception("La unidad posee un inquilino. Solo el usuario de tipo inquilino puede generar el reclamo");
                 }
                 // verificamos si el usuario es INQUILINO que sea el inquilino de la unidad
                 else {
-                    if (!usuarioDb.equals(newReclamo.getUnidad().getInquilino())){
+                    if (!usuarioDb.equals(newReclamo.getUnidad().getInquilino())) {
                         log.error("El inquilino no pertenece a la unidad del reclamo por lo que no puede realizar el reclamo");
                         throw new Exception("El inquilino no pertenece a la unidad del reclamo por lo que no puede realizar el reclamo");
                     }

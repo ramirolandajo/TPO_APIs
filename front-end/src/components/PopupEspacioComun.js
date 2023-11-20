@@ -9,20 +9,22 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [creado, setCreado] = React.useState(false);
+
   const [piso, setPiso] = React.useState('');
   const [descripcion, setDescripcion] = React.useState('');
   const [edificio, setEdificio] = React.useState('');
-  const [creado, setCreado] = React.useState(false);
 
   async function handleSubmit(event) {
     try {
       event.preventDefault();
       if (piso === '' || descripcion === '' || edificio === '') {
-        alert('Error en la creación del espacio común!')
-        throw new Error('Error en la creación del espacio común!');
+        alert('Error al crear el espacio común (llene los campos necesarios)')
+        throw new Error('Error al crear el espacio común (llene los campos necesarios)');
       }
       const data = { piso, descripcion, edificio }
       const token = localStorage.getItem('token')
+      
       const response = await fetch("/tpo_apis/espacios_comunes/", {
         method: "POST",
         headers: {
@@ -32,12 +34,14 @@ export default function FormDialog() {
         body: JSON.stringify(data)
       })
       if (!response.ok) {
-        throw new Error("Error creando el espacio común")
+        throw new Error(await response.text())
       }
       console.log("El espacio comun ha sido creado con exito!")
       console.log(await response.json())
+      setCreado(true);
     }
     catch (error) {
+      alert(error);
       console.error(error)
     }
   }
@@ -49,6 +53,9 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
     setCreado(false);
+    setPiso('');
+    setDescripcion('');
+    setEdificio('');
   };
 
   return (
@@ -59,17 +66,17 @@ export default function FormDialog() {
       <Dialog open={open} onClose={handleClose} maxWidth={'sm'} fullWidth>
         {creado ? (
           <div>
-            <DialogTitle>Edificio creado</DialogTitle>
+            <DialogTitle>Espacio común creado</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Edificio creado con éxito!
+              Espacio común creado con éxito!
               </DialogContentText>
               <Button onClick={handleClose} variant='outlined' sx={{ my: 2 }}>Aceptar</Button>
             </DialogContent>
           </div>
         ) : (
           <div>
-            <DialogTitle>Crear Espacio Comun</DialogTitle>
+            <DialogTitle>Crear Espacio común</DialogTitle>
             <DialogContent>
               <DialogContentText>
                 Ingrese los datos del espacio comun.

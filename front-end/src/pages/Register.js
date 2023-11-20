@@ -12,7 +12,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PersonIcon from '@mui/icons-material/Person';
 import { InputLabel, Select, MenuItem, FormControl } from '@mui/material';
-import NavbarRegistro from '../components/Navbars/NavbarInicioSesion';
+import { useNavigate } from 'react-router';
+import NavbarRegistro from '../components/Navbars/NavbarRegistro';
 import "../styles/Register.css";
 
 const defaultTheme = createTheme();
@@ -26,27 +27,40 @@ export default function Register() {
   const [password, setPassword] = React.useState('');
   const [tipoUsuario, setTipoUsuario] = React.useState('');
 
+  const nav = useNavigate();
+
+  function navegarHome() {
+      nav('/')
+  }
+
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      if (nombre === '' || apellido === '' || cuil === '' || usuario === '' || password === '' || tipoUsuario === '') {
+        throw new Error('Error al registrarse (llene los campos necesarios)');
+      }
       const nombreCompleto = nombre + " " + apellido
       const data = {usuario, password, cuil, nombreCompleto, tipoUsuario}
       console.log(data)
+
       const response = await fetch("/tpo_apis/usuarios/signUp",{
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
       })
       if (!response.ok) {
-        throw new Error("Error en el registro de usuarios")
+        throw new Error(await response.text())
       }
       console.log("Usuario registrado con exito!")
       console.log(await response.json())
+
+      alert("Registro exitoso!")
+      navegarHome();
     }
     catch (error) {
+      alert(error);
       console.error(error);
     }
-
   };
 
 
@@ -59,7 +73,7 @@ export default function Register() {
             <CssBaseline />
             <Box
               sx={{
-                marginTop: 8,
+                marginTop: 3,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

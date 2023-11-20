@@ -10,7 +10,7 @@ const WaterDropGrid = () => {
 };
 
 const GRID_WIDTH = 35;
-const GRID_HEIGHT = 23;
+const GRID_HEIGHT = 21;
 
 const DotGrid = () => {
   const handleDotClick = (e) => {
