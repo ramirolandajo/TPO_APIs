@@ -1,6 +1,7 @@
 package com.uade.api.controllers;
 
 import com.uade.api.models.DTOs.EspacioComunDTO;
+import com.uade.api.models.EdificioModel;
 import com.uade.api.models.EspacioComunModel;
 import com.uade.api.services.EdificioService;
 import com.uade.api.services.EspacioComunService;
@@ -49,10 +50,9 @@ public class EspacioComunController {
         return new ResponseEntity<>(espacioComun, HttpStatus.OK);
     }
     @GetMapping(path ="/")
-    public List<EspacioComunModel> getAllEspacioComunes(){
-        return espacioComunService.findAllEspacioComunes();
+    public ResponseEntity<List<EspacioComunModel>> getAllEspaciosComunes(){
+        return new ResponseEntity<>(espacioComunService.findAllEspacioComunes(), HttpStatus.OK);
     }
-
     private EspacioComunDTO convertToDTO(EspacioComunModel espacioComun) {
         EspacioComunDTO espacioComunModelDTO = new EspacioComunDTO(
                 espacioComun.getPiso(),

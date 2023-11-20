@@ -61,12 +61,12 @@ public class UnidadController {
 
     }
     @GetMapping(path ="/")
-    public List<UnidadModelDTO> getAllUnidades(){
+    public ResponseEntity<List<UnidadModelDTO>> getAllUnidades(){
         List<UnidadModelDTO> unidadesDTO = new ArrayList<>();
         for (UnidadModel u: unidadService.findAllUnidades()) {
             unidadesDTO.add(convertToDTO(u));
         }
-        return unidadesDTO;
+        return new ResponseEntity<>(unidadesDTO, HttpStatus.OK);
     }
 
     private UnidadModelDTO convertToDTO(UnidadModel unidad) {

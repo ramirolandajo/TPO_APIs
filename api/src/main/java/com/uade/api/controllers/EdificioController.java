@@ -46,7 +46,7 @@ public class EdificioController {
         return new ResponseEntity<>(edificio, HttpStatus.OK);
     }
     @GetMapping(path ="/")
-    public List<EdificioModel> getAllEdificios(){
-        return edificioService.findAllEdificios();
+    public ResponseEntity<List<EdificioModel>> getAllEdificios(){
+        return new ResponseEntity<>(edificioService.findAllEdificios(), HttpStatus.OK);
     }
 }

@@ -43,7 +43,7 @@ public class UsuarioController {
         }
     }
     @GetMapping(path ="/")
-    public List<UsuarioModel> getAllUsuarios(){
-        return usuarioService.findAllUsuarios();
+    public ResponseEntity<List<UsuarioModel>> getAllUsuarios(){
+        return new ResponseEntity<>(usuarioService.findAllUsuarios(), HttpStatus.OK);
     }
 }

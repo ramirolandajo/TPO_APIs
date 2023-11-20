@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../styles/AdminDashboard.css';
-import NabvarAdminDashboard from '../components/Navbars/NabvarAdminDashboardHome';
+import NabvarDashboard from '../components/Navbars/NabvarDashboard';
 import PopupEdificio from '../components/PopupEdificio';
 import PopupUnidad from '../components/PopupUnidad';
 import PopupEspacioComun from '../components/PopupEspacioComun';
@@ -31,7 +31,7 @@ export default function AdminDashboard() {
 
   return (
     <div className='main'>
-      <NabvarAdminDashboard/>
+      <NabvarDashboard/>
       <div className='mainDashboardHome'>
         <h1>Bienvenido al Dashboard {user.usuario}</h1>
         <div className='button-wrapper'>

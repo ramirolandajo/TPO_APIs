@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 @Slf4j
 @Service
@@ -140,5 +142,16 @@ public class ReclamoService {
 
     public List<ReclamoModel> findAllReclamos() {
         return this.reclamoRepository.findAll();
+    }
+
+    public List<ReclamoModel> findAllReclamosFromUser(Long id) {
+        List<ReclamoModel> allReclamos = this.reclamoRepository.findAll();
+        List<ReclamoModel> reclamosFromUser = new ArrayList<>();
+        for (ReclamoModel reclamo : allReclamos) {
+            if (Objects.equals(reclamo.getUsuario().getIdUsuario(), id)) {
+                reclamosFromUser.add(reclamo);
+            }
+        }
+        return reclamosFromUser;
     }
 }
