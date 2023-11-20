@@ -126,7 +126,19 @@ public class ReclamoService {
         log.info("El reclamo actualizado: " + reclamoDb);
         return this.reclamoRepository.save(reclamoDb);
     }
+    
+    public String deleteReclamo(Long id) throws Exception{
+        Optional<ReclamoModel> reclamoOp = this.reclamoRepository.findById(id);
+        if(reclamoOp.isEmpty()){
+            log.error("El reclamo que intenta borrar no se encuentra en la base de datos.");
+            throw new Exception("El reclamo que intenta borrar no se encuentra en la base de datos.");
+        }
 
+        ReclamoModel reclamoDb = reclamoOp.get();
+
+        this.reclamoRepository.delete(reclamoDb);
+        return "Reclamo eliminado con éxito!";
+    }
     public ReclamoModel findReclamoById(Long id) throws Exception {
         log.info("Id ingresado: " + id);
         if (id <= 0){

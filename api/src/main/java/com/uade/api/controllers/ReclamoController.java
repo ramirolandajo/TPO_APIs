@@ -52,6 +52,16 @@ public class ReclamoController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<?> deleteReclamo(@PathVariable Long id) throws Exception {
+        try {
+            return new ResponseEntity<>(reclamoService.deleteReclamo(id),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
     @GetMapping(path ="/{id}")
     public ResponseEntity<?> getReclamoById(@PathVariable Long id) throws Exception {
         ReclamoModel reclamo = reclamoService.findReclamoById(id);
