@@ -12,10 +12,15 @@ export default function FormDialog() {
   const [piso, setPiso] = React.useState('');
   const [descripcion, setDescripcion] = React.useState('');
   const [edificio, setEdificio] = React.useState('');
+  const [creado, setCreado] = React.useState(false);
 
   async function handleSubmit(event) {
     try {
       event.preventDefault();
+      if (piso === '' || descripcion === '' || edificio === '') {
+        alert('Error en la creación del espacio común!')
+        throw new Error('Error en la creación del espacio común!');
+      }
       const data = { piso, descripcion, edificio }
       const token = localStorage.getItem('token')
       const response = await fetch("/tpo_apis/espacios_comunes/", {
@@ -43,21 +48,8 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    setCreado(false);
   };
-
-  // const cargaEdificio = () => {
-  //   // Tomo valor    
-  //   // Componente para crear edificio
-  //   const crearEspacio = crearEdificio('espacioComun');
-
-  //   if(crearEspacio){
-  //       // Cierro        
-  //       handleClose();
-  //   }else{
-  //     alert("NO se pudo ingresar la informacion");
-  //     return false;
-  //   }
-  // }
 
   return (
     <React.Fragment>
@@ -65,49 +57,63 @@ export default function FormDialog() {
         Crear Espacio Comun
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth={'sm'} fullWidth>
-        <DialogTitle>Crear Espacio Comun</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Ingrese los datos del espacio comun.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="piso"
-            label="Piso"
-            type="number"
-            fullWidth
-            variant="standard"
-            value={piso}
-            onChange={(e) => setPiso(e.target.value)}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="descripcion"
-            label="Descripcion"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="idEdificio"
-            label="Id del Edificio"
-            type="number"
-            fullWidth
-            variant="standard"
-            value={edificio}
-            onChange={(e) => setEdificio(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleSubmit}>Crear</Button>
-        </DialogActions>
+        {creado ? (
+          <div>
+            <DialogTitle>Edificio creado</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Edificio creado con éxito!
+              </DialogContentText>
+              <Button onClick={handleClose} variant='outlined' sx={{ my: 2 }}>Aceptar</Button>
+            </DialogContent>
+          </div>
+        ) : (
+          <div>
+            <DialogTitle>Crear Espacio Comun</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Ingrese los datos del espacio comun.
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="piso"
+                label="Piso"
+                type="number"
+                fullWidth
+                variant="standard"
+                value={piso}
+                onChange={(e) => setPiso(e.target.value)}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="descripcion"
+                label="Descripcion"
+                type="text"
+                fullWidth
+                variant="standard"
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="idEdificio"
+                label="Id del Edificio"
+                type="number"
+                fullWidth
+                variant="standard"
+                value={edificio}
+                onChange={(e) => setEdificio(e.target.value)}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancelar</Button>
+              <Button onClick={handleSubmit}>Crear</Button>
+            </DialogActions>
+          </div>
+        )}
       </Dialog>
     </React.Fragment>
   );

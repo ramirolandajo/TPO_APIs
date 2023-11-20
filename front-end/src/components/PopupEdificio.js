@@ -6,16 +6,19 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-// import { crearEdificio } from './createBuilding';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [direccion, setDireccion] = React.useState('');
-  
-  async function handleSubmit(event){
+  const [creado, setCreado] = React.useState(false);
+  async function handleSubmit(event) {
     try {
       event.preventDefault();
-      const data = {direccion}
+      if (direccion === '')  {
+        alert('No se puede crear un edificio sin dirección!')
+        throw new Error('No se puede crear un edificio sin dirección!');
+      }
+      const data = { direccion }
       console.log(data);
       const token = localStorage.getItem('token')
       console.log(token);
@@ -31,6 +34,7 @@ export default function FormDialog() {
         throw new Error("Error en la creacion del edificio")
       }
       console.log("Edificio Creado!");
+      setCreado(true);
     }
     catch (error) {
       console.error(error);
@@ -43,21 +47,9 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    setCreado(false);
   };
 
-  // const cargaEdificio = () => {
-  //   // Tomo valor    
-  //   // Componente para crear edificio
-  //   const crearEdifio = crearEdificio('edificio');
-
-  //   if(crearEdifio){
-  //       // Cierro        
-  //       handleClose();
-  //   }else{
-  //     alert("NO se pudo ingresar la informacion");
-  //     return false;
-  //   }
-  // }
 
   return (
     <React.Fragment>
@@ -65,27 +57,42 @@ export default function FormDialog() {
         Crear Edificio
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth={'sm'} fullWidth>
-        <DialogTitle>Crear Edificio</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Ingrese los datos del edificio.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="direccion-edificio"
-            label="Direccion Edificio"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={direccion}
-            onChange={(e)=>setDireccion(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleSubmit}>Crear</Button>
-        </DialogActions>
+        {creado ? (
+          <div>
+            <DialogTitle>Edificio creado</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Edificio creado con éxito! 
+              </DialogContentText>
+              <Button onClick={handleClose} variant='outlined' sx={{my:2}}>Aceptar</Button>
+            </DialogContent>
+          </div>
+        ) :
+          (
+            <div>
+              <DialogTitle>Crear Edificio</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Ingrese los datos del edificio.
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="direccion-edificio"
+                  label="Direccion Edificio"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={direccion}
+                  onChange={(e) => setDireccion(e.target.value)}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancelar</Button>
+                <Button onClick={handleSubmit}>Crear</Button>
+              </DialogActions>
+            </div>
+          )}
       </Dialog>
     </React.Fragment>
   );

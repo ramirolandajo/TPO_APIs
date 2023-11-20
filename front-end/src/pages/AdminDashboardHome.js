@@ -33,7 +33,7 @@ export default function AdminDashboard() {
     <div className='main'>
       <NabvarAdminDashboard/>
       <div className='mainDashboardHome'>
-        <h1>Bienvenido al dashboard de Admin {user.usuario}</h1>
+        <h1>Bienvenido al Dashboard {user.usuario}</h1>
         <div className='button-wrapper'>
           <PopupEdificio/>
           <PopupUnidad/>

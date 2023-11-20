@@ -19,3 +19,7 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+.botonExito{
+    width: 100px;
+}
