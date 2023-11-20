@@ -20,7 +20,7 @@ export default function UserDashboard() {
       const token = localStorage.getItem('token')
       const decodedToken = decodeToken(token)
 
-      const response = await fetch(`/tpo_apis/reclamos/all/${decodedToken.id}`, {
+      const response = await fetch(`/tpo_apis/reclamos/allFromUser/${decodedToken.id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export default function UserDashboard() {
 
   const handleDelete = async (idReclamo) => {
     const token = localStorage.getItem('token')
-    const response = await fetch(`/tpo_apis/reclamos/all/${idReclamo}`, {
+    const response = await fetch(`/tpo_apis/reclamos/${idReclamo}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export default function UserDashboard() {
       <NavbarDashboard/>
       <div className='mainDashboardHome'>
         <div className='funcionalidades'>
-          <h1>Bienvenido al dashboard de Usuario!</h1>
+          <h1>Bienvenido al dashboard {decodeToken(localStorage.getItem('token')).sub}!</h1>
           <PopupReclamo />
         </div>
         <Paper sx={{my: 4, boxShadow: 10, borderRadius: 2, pt: 2}}>

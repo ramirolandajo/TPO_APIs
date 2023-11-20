@@ -62,12 +62,16 @@ public class ReclamoController {
         }
         return new ResponseEntity<>(reclamo, HttpStatus.OK);
     }
-    @GetMapping(path ="/")
-    public ResponseEntity<List<ReclamoModel>> getAllReclamos(){
-        return new ResponseEntity<>(reclamoService.findAllReclamos(), HttpStatus.OK);
-    }
+    @GetMapping(path ="/all")
+    public ResponseEntity<List<ReclamoDevueltoDTO>> getAllReclamos(){
+        List<ReclamoModel> reclamos = reclamoService.findAllReclamos();
+        List<ReclamoDevueltoDTO> reclamosDTO = new ArrayList<>();
+        for (ReclamoModel reclamo : reclamos) {
+            reclamosDTO.add(converToDTO(reclamo));
+        }
+        return new ResponseEntity<>(reclamosDTO, HttpStatus.OK);    }
 
-    @GetMapping(path = "/all/{id}")
+    @GetMapping(path = "/allFromUser/{id}")
     public ResponseEntity<List<ReclamoDevueltoDTO>> getAllReclamosFromUser(@PathVariable Long id) {
         List<ReclamoModel> reclamosFromUser = reclamoService.findAllReclamosFromUser(id);
         List<ReclamoDevueltoDTO> reclamosFromUserDTO = new ArrayList<>();
@@ -76,7 +80,6 @@ public class ReclamoController {
         }
         return new ResponseEntity<>(reclamosFromUserDTO, HttpStatus.OK);
     }
-
 
 
     private ReclamoModel convertToEntity(ReclamoModelDTO reclamoDTO) throws Exception {

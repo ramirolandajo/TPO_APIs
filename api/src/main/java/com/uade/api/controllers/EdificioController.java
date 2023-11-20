@@ -1,5 +1,6 @@
 package com.uade.api.controllers;
 
+import com.uade.api.models.DTOs.EdificioDevueltoDTO;
 import com.uade.api.models.EdificioModel;
 import com.uade.api.services.EdificioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin()
 @RestController
@@ -46,7 +48,22 @@ public class EdificioController {
         return new ResponseEntity<>(edificio, HttpStatus.OK);
     }
     @GetMapping(path ="/")
-    public ResponseEntity<List<EdificioModel>> getAllEdificios(){
-        return new ResponseEntity<>(edificioService.findAllEdificios(), HttpStatus.OK);
+    public ResponseEntity<List<EdificioDevueltoDTO>> getAllEdificios(){
+        List<EdificioDevueltoDTO> edificiosDTO = new ArrayList<>();
+        for (EdificioModel edificio: edificioService.findAllEdificios()) {
+            edificiosDTO.add(converToDTO(edificio));
+        }
+        return new ResponseEntity<>(edificiosDTO, HttpStatus.OK);
+    }
+
+    private EdificioDevueltoDTO converToDTO(EdificioModel edificio) {
+        int cantUnidades = edificio.getUnidades().size();
+        int cantEspaciosComunes = edificio.getEspaciosComunes().size();
+        return new EdificioDevueltoDTO(
+                edificio.getIdEdificio(),
+                edificio.getDireccion(),
+                cantUnidades,
+                cantEspaciosComunes
+        );
     }
 }

@@ -22,7 +22,10 @@ export default function FormDialog() {
         alert('Error al crear el espacio común (llene los campos necesarios)')
         throw new Error('Error al crear el espacio común (llene los campos necesarios)');
       }
-      const data = { piso, descripcion, edificio }
+      setPiso(parseInt(piso))
+      const idEdificio = parseInt(edificio)
+      const data = { piso, descripcion, idEdificio }
+      console.log(data);
       const token = localStorage.getItem('token')
       
       const response = await fetch("/tpo_apis/espacios_comunes/", {
