@@ -8,13 +8,13 @@ Nuestro proyecto se enfoca en simplificar la gestión de problemas en edificios 
 
 ## Tecnologías 💻
 
-- **Backend**: Utilizamos Node.js para crear una API REST usando Express, ¡rápido y eficiente!
+- **Backend**: Utilizamos Java Spring Boot para crear una API REST ¡rápido y eficiente!
 
-- **Base de Datos**: Guardamos los datos en MS SQL Server, para un acceso fácil y seguro.
+- **Base de Datos**: Guardamos los datos en MySQL, para un acceso fácil y seguro.
 
-- **Frontend**: React.js nos permite crear una interfaz moderna y amigable.
+- **Frontend**: React.js nos permite crear una interfaz moderna y amigable, utilizando la libreria Material UI para el diseño de componentes.
 
-- **Comunicación**: El frontend y el backend hablan JSON a través de solicitudes HTTP.
+- **Comunicación**: El frontend y el backend hablan JSON a través de solicitudes HTTP, utilizando por parte del frontend la fetch API.
 
 ## Equipo 🤝
 
