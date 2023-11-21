@@ -11,7 +11,6 @@ export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
     const [creado, setCreado] = React.useState(false);
 
-    const [estado, setEstado] = React.useState('');
     const [descripcion, setDescripcion] = React.useState('');
     const [usuario, setUsuario] = React.useState('');
     const [edificio, setEdificio] = React.useState('');
@@ -22,7 +21,7 @@ export default function FormDialog() {
     async function handleSubmit(event) {
         try {
             event.preventDefault();
-            if (estado === '' || descripcion === '' || usuario === '' || edificio === '') {
+            if (descripcion === '' || usuario === '' || edificio === '') {
                 alert('Error al crear el reclamo (llene los campos necesarios)')
                 throw new Error('Error al crear el reclamo (llene los campos necesarios');
             }
@@ -36,7 +35,7 @@ export default function FormDialog() {
             else if (isNaN(idEspacioComun)){
                 idEspacioComun = null;
             }
-
+            const estado = "NUEVO"
             const data = { estado, descripcion, idEdificio, idUsuario, idUnidad, idEspacioComun }
             console.log(data);
             const token = localStorage.getItem('token')
@@ -82,7 +81,6 @@ export default function FormDialog() {
     const handleClose = () => {
         setOpen(false);
         setCreado(false);
-        setEstado('');
         setDescripcion('');
         setUsuario('');
         setEdificio('');
@@ -106,96 +104,87 @@ export default function FormDialog() {
                             <Button onClick={handleClose} variant='outlined' sx={{ my: 2 }}>Aceptar</Button>
                         </DialogContent>
                     </div>
-                ) :
-                    (
-                        <div>
-                            <DialogTitle>Crear Reclamo</DialogTitle>
-                            <DialogContent>
-                                <DialogContentText>
-                                    Ingrese los datos del reclamo.
-                                </DialogContentText>
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="estado-reclamo"
-                                    label="Estado Reclamo"
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    value={estado}
-                                    onChange={(e) => setEstado(e.target.value)}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="descripcion-reclamo"
-                                    label="Descripcion Reclamo"
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    value={descripcion}
-                                    onChange={(e) => setDescripcion(e.target.value)}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="Id-edificio"
-                                    label="Id Edificio"
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    value={edificio}
-                                    onChange={(e) => setEdificio(e.target.value)}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="Id-usuario"
-                                    label="Id Usuario"
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    value={usuario}
-                                    onChange={(e) => setUsuario(e.target.value)}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="Id-unidad"
-                                    label="Id Unidad"
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    value={unidad}
-                                    onChange={(e) => setUnidad(e.target.value)}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="Id-espacioComun"
-                                    label="Id Espacio Comun"
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    value={espacioComun}
-                                    onChange={(e) => setEspacioComun(e.target.value)}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="imagen"
-                                    label="Imagen"
-                                    type="file"
-                                    fullWidth
-                                    variant="standard"
-                                    onChange={(e) => setImagen(e.target.files[0])}
-                                />
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleClose}>Cancelar</Button>
-                                <Button onClick={handleSubmit}>Crear</Button>
-                            </DialogActions>
-                        </div>)};
+                ) 
+                :
+                (
+                    <div>
+                        <DialogTitle>Crear Reclamo</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Ingrese los datos del reclamo.
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="descripcion-reclamo"
+                                label="Descripcion Reclamo"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                                value={descripcion}
+                                inputProps={{maxLength: 50}}
+                                onChange={(e) => setDescripcion(e.target.value)}
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="Id-edificio"
+                                label="Id Edificio"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                                value={edificio}
+                                onChange={(e) => setEdificio(e.target.value)}
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="Id-usuario"
+                                label="Id Usuario"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                                value={usuario}
+                                onChange={(e) => setUsuario(e.target.value)}
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="Id-unidad"
+                                label="Id Unidad"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                                value={unidad}
+                                onChange={(e) => setUnidad(e.target.value)}
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="Id-espacioComun"
+                                label="Id Espacio Comun"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                                value={espacioComun}
+                                onChange={(e) => setEspacioComun(e.target.value)}
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="imagen"
+                                label="Imagen"
+                                type="file"
+                                fullWidth
+                                variant="standard"
+                                onChange={(e) => setImagen(e.target.files[0])}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose}>Cancelar</Button>
+                            <Button onClick={handleSubmit}>Crear</Button>
+                        </DialogActions>
+                    </div>)};
             </Dialog>
         </React.Fragment>
     );

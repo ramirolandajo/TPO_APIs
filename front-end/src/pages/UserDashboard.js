@@ -10,6 +10,7 @@ import '../styles/UserDashboard.css';
 import { decodeToken } from 'react-jwt';
 import { Paper } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Footer from '../components/Footer';
 
 export default function UserDashboard() {
 
@@ -38,17 +39,27 @@ export default function UserDashboard() {
   },[])
 
   const handleDelete = async (idReclamo) => {
-    const token = localStorage.getItem('token')
-    const response = await fetch(`/tpo_apis/reclamos/${idReclamo}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-    })
-    if (!response.ok) {
-      throw new Error(await response.text())
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`/tpo_apis/reclamos/${idReclamo}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      })
+      if (!response.ok) {
+        throw new Error(await response.text())
+      }
+      const res = await response.text()
+      alert(res)
+      window.location.reload(true)
     }
+    catch (error) {
+      alert(error)
+      console.error(error);
+    }
+
   }
 
   return (
@@ -97,6 +108,7 @@ export default function UserDashboard() {
           </React.Fragment>
         </Paper>
       </div>
+      <Footer title={"Pisos Picados"} pos={'absolute'}/>
     </div>
     )
 }

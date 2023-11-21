@@ -12,9 +12,9 @@ import Container from '@mui/material/Container';
 import PersonIcon from '@mui/icons-material/Person';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavbarInicioSesion from '../components/Navbars/NavbarInicioSesion.js';
-import '../styles/InicioSesion.css'
 import { useNavigate } from 'react-router';
 import { isExpired, decodeToken } from 'react-jwt';
+import Footer from '../components/Footer.js';
 
 const defaultTheme = createTheme();
 
@@ -148,6 +148,7 @@ export default function SignIn() {
             </Box>
           </Container>
         </ThemeProvider>
+        <Footer title={"Pisos Picados"} pos={'absolute'}/>
       </div>
   );
 }

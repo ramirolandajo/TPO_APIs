@@ -14,6 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { InputLabel, Select, MenuItem, FormControl } from '@mui/material';
 import { useNavigate } from 'react-router';
 import NavbarRegistro from '../components/Navbars/NavbarRegistro';
+import Footer from '../components/Footer';
 import "../styles/Register.css";
 
 const defaultTheme = createTheme();
@@ -73,7 +74,6 @@ export default function Register() {
             <CssBaseline />
             <Box
               sx={{
-                marginTop: 3,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -83,7 +83,7 @@ export default function Register() {
               <Typography component="h1" variant="h5">
                 Registro
               </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{pt: 3}}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <TextField
@@ -193,6 +193,7 @@ export default function Register() {
           </Container>
         </ThemeProvider>
       </div>
+      <Footer title={"Pisos Picados"} pos={'absolute'}/>
     </div>
   );
 }

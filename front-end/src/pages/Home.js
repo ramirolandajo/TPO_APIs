@@ -1,9 +1,9 @@
 import NavbarPrincipal from '../components/Navbars/NavbarPrincipal';
 import React from 'react';
-import Background from '../components/Background';
 import '../styles/Home.css'
 import HomeWelcome from '../components/HomeWelcome';
 import WaterDropGrid from '../components/WaterDropGrid';
+import Footer from '../components/Footer';
 
 export default function Home() {
 
@@ -11,10 +11,10 @@ export default function Home() {
     <div className='home'>
       <NavbarPrincipal/>
       <main className='main-wrapper'>
-        {/* <Background/> */}
         <HomeWelcome/>
         <WaterDropGrid/>
       </main>
+      <Footer title={"Pisos Picados"} pos={'absolute'}/>
     </div>
   )
 }

@@ -18,11 +18,11 @@ function Copyright() {
 }
 
 function Footer(props) {
-  const { description, title } = props;
+  const { description, title, pos } = props;
 
   return (
     <footer className='footer'>
-      <Box component="footer" sx={{ bgcolor: '#F2F1F1', py: 2, position: 'fixed', bottom: 0, width: '100vw', color: '#2f2f30'}}>
+      <Box component="footer" sx={{ bgcolor: '#F2F1F1', py: 2, width: '100vw', color: '#2f2f30', position: pos, bottom: 0}}>
         <Container maxWidth="lg">
           <Typography variant="h5" align="center" gutterBottom>
             {title}
