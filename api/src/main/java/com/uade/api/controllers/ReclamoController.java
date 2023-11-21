@@ -43,10 +43,9 @@ public class ReclamoController {
         }
     }
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateReclamo(@RequestBody ReclamoModelDTO reclamoDTO, @PathVariable Long id) {
+    public ResponseEntity<?> updateEstadoReclamo(@RequestBody String estadoReclamo, @PathVariable Long id) {
         try {
-            ReclamoModel reclamo = convertToEntity(reclamoDTO);
-            return new ResponseEntity<>(reclamoService.updateReclamo(reclamo, id), HttpStatus.OK);
+            return new ResponseEntity<>(reclamoService.updateEstadoReclamo(estadoReclamo, id), HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
@@ -54,7 +53,7 @@ public class ReclamoController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> deleteReclamo(@PathVariable Long id) throws Exception {
+    public ResponseEntity<?> deleteReclamo(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(reclamoService.deleteReclamo(id),HttpStatus.OK);
         }catch (Exception e){
@@ -63,14 +62,15 @@ public class ReclamoController {
     }
 
     @GetMapping(path ="/{id}")
-    public ResponseEntity<?> getReclamoById(@PathVariable Long id) throws Exception {
-        ReclamoModel reclamo = reclamoService.findReclamoById(id);
+    public ResponseEntity<?> getReclamoById(@PathVariable Long id) {
 
-        if (reclamo==null){
-            String mensaje = "Reclamo no encontrado con el Id: " + id;
-            return new ResponseEntity<>(mensaje, HttpStatus.NOT_FOUND);
+        try {
+            ReclamoModel reclamo = reclamoService.findReclamoById(id);
+            return new ResponseEntity<>(reclamo, HttpStatus.OK);
         }
-        return new ResponseEntity<>(reclamo, HttpStatus.OK);
+        catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
     @GetMapping(path ="/all")
     public ResponseEntity<List<ReclamoDevueltoDTO>> getAllReclamos(){

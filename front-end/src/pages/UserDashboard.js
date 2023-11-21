@@ -11,6 +11,7 @@ import { decodeToken } from 'react-jwt';
 import { Paper } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Footer from '../components/Footer';
+import PopupImagen from '../components/PopupImagen';
 
 export default function UserDashboard() {
 
@@ -92,9 +93,7 @@ export default function UserDashboard() {
                     <TableCell>{row.edificio}</TableCell>
                     <TableCell>{row.lugarReclamo}</TableCell>
                     <TableCell >
-                      <div onClick={(e) => {handleDelete(row.idReclamo)}}>
-
-                      </div>
+                      <PopupImagen idImagen={row.idReclamo}/>
                     </TableCell>
                     <TableCell align="right">
                       <div onClick={(e) => {handleDelete(row.idReclamo)}}>

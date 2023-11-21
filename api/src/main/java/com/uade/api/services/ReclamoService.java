@@ -102,14 +102,14 @@ public class ReclamoService {
         return this.reclamoRepository.save(newReclamo);
     }
 
-    public ReclamoModel updateReclamo(ReclamoModel reclamo, Long id) throws Exception {
+    public ReclamoModel updateEstadoReclamo(String estadoReclamo, Long id) throws Exception {
         log.info("Id ingresado: " + id);
         if (id <= 0){
             log.info("El id ingresado no es valido.");
             throw new Exception("El id ingresado no es valido");
         }
 
-        Optional<ReclamoModel> reclamoOp = this.reclamoRepository.findById(reclamo.getIdReclamo());
+        Optional<ReclamoModel> reclamoOp = this.reclamoRepository.findById(id);
 
         if (reclamoOp.isEmpty()) {
             log.info("El reclamo que intenta actualizar no se encuentra en la base de datos");
@@ -117,16 +117,12 @@ public class ReclamoService {
         }
 
         ReclamoModel reclamoDb = reclamoOp.get();
-        reclamoDb.setDescripcion(reclamo.getDescripcion());
-        reclamoDb.setUsuario(reclamo.getUsuario());
-        reclamoDb.setEdificio(reclamo.getEdificio());
-        reclamoDb.setEstado(reclamo.getEstado());
-        reclamoDb.setUnidad(reclamo.getUnidad());
+        reclamoDb.setEstado(estadoReclamo);
 
         log.info("El reclamo actualizado: " + reclamoDb);
         return this.reclamoRepository.save(reclamoDb);
     }
-    
+
     public String deleteReclamo(Long id) throws Exception{
         Optional<ReclamoModel> reclamoOp = this.reclamoRepository.findById(id);
         if(reclamoOp.isEmpty()){
