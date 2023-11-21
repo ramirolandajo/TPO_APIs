@@ -43,6 +43,7 @@ export default function PopupEstado(props) {
           const res = await response.json()
           alert("Estado actualizado con exito")
           console.log(res)
+          handleClose();
         }
         catch (error) {
           alert(error)
