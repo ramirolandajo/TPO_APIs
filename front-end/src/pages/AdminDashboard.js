@@ -8,6 +8,7 @@ import { decodeToken } from 'react-jwt';
 import Footer from '../components/Footer';
 import PaperEdificiosAdmin from '../components/PaperEdificiosAdmin';
 import PaperReclamosAdmin from '../components/PaperReclamosAdmin';
+import PaperUsuariosAdmin from '../components/PaperUsuariosAdmin';
 
 export default function AdminDashboard() {
   return (
@@ -22,6 +23,7 @@ export default function AdminDashboard() {
         </div>
         <PaperEdificiosAdmin/>
         <PaperReclamosAdmin/>
+        <PaperUsuariosAdmin/>
       </div>
       <Footer title={"Pisos Picados"} pos={'sticky'}/>
     </div>

@@ -6,13 +6,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { decodeToken } from 'react-jwt';
 
 export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
     const [creado, setCreado] = React.useState(false);
 
     const [descripcion, setDescripcion] = React.useState('');
-    const [usuario, setUsuario] = React.useState('');
     const [edificio, setEdificio] = React.useState('');
     const [unidad, setUnidad] = React.useState('');
     const [espacioComun, setEspacioComun] = React.useState('');
@@ -21,12 +21,11 @@ export default function FormDialog() {
     async function handleSubmit(event) {
         try {
             event.preventDefault();
-            if (descripcion === '' || usuario === '' || edificio === '') {
+            if (descripcion === '' || edificio === '') {
                 alert('Error al crear el reclamo (llene los campos necesarios)')
                 throw new Error('Error al crear el reclamo (llene los campos necesarios');
             }
             const idEdificio = parseInt(edificio)
-            const idUsuario = parseInt(usuario)
             var idUnidad = parseInt(unidad)
             var idEspacioComun = parseInt(espacioComun)
             if (isNaN(idUnidad)) {
@@ -36,9 +35,11 @@ export default function FormDialog() {
                 idEspacioComun = null;
             }
             const estado = "NUEVO"
+            const token = localStorage.getItem('token')
+            const decodedToken = decodeToken(token)
+            const idUsuario = decodedToken.id
             const data = { estado, descripcion, idEdificio, idUsuario, idUnidad, idEspacioComun }
             console.log(data);
-            const token = localStorage.getItem('token')
             
             const response = await fetch("/tpo_apis/reclamos/", {
                 method: "POST",
@@ -82,7 +83,6 @@ export default function FormDialog() {
         setOpen(false);
         setCreado(false);
         setDescripcion('');
-        setUsuario('');
         setEdificio('');
         setUnidad('');
         setEspacioComun('');
@@ -135,17 +135,6 @@ export default function FormDialog() {
                                 variant="standard"
                                 value={edificio}
                                 onChange={(e) => setEdificio(e.target.value)}
-                            />
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="Id-usuario"
-                                label="Id Usuario"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                value={usuario}
-                                onChange={(e) => setUsuario(e.target.value)}
                             />
                             <TextField
                                 autoFocus
