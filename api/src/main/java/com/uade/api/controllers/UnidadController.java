@@ -1,5 +1,6 @@
 package com.uade.api.controllers;
 
+import com.uade.api.models.DTOs.UnidadDevueltaDTO;
 import com.uade.api.models.DTOs.UnidadModelDTO;
 import com.uade.api.models.ReclamoModel;
 import com.uade.api.models.UnidadModel;
@@ -61,14 +62,37 @@ public class UnidadController {
 
     }
     @GetMapping(path ="/")
-    public ResponseEntity<List<UnidadModelDTO>> getAllUnidades(){
-        List<UnidadModelDTO> unidadesDTO = new ArrayList<>();
+    public ResponseEntity<List<UnidadDevueltaDTO>> getAllUnidades(){
+        List<UnidadDevueltaDTO> unidadesDTO = new ArrayList<>();
         for (UnidadModel u: unidadService.findAllUnidades()) {
-            unidadesDTO.add(convertToDTO(u));
+            unidadesDTO.add(converToDTO(u));
         }
         return new ResponseEntity<>(unidadesDTO, HttpStatus.OK);
     }
 
+    private UnidadDevueltaDTO converToDTO(UnidadModel unidad) {
+        if (unidad.getInquilino() == null) {
+            UnidadDevueltaDTO unidadDTO = new UnidadDevueltaDTO(
+                    unidad.getIdUnidad(),
+                    unidad.getPiso(),
+                    unidad.getNumero(),
+                    unidad.getDuenio().getIdUsuario(),
+                    unidad.getEdificio().getIdEdificio()
+            );
+            return unidadDTO;
+        }
+        else {
+            UnidadDevueltaDTO unidadDTO = new UnidadDevueltaDTO(
+                    unidad.getIdUnidad(),
+                    unidad.getPiso(),
+                    unidad.getNumero(),
+                    unidad.getDuenio().getIdUsuario(),
+                    unidad.getInquilino().getIdUsuario(),
+                    unidad.getEdificio().getIdEdificio()
+            );
+            return unidadDTO;
+        }
+    }
     private UnidadModelDTO convertToDTO(UnidadModel unidad) {
         UnidadModelDTO unidadModelDTO = new UnidadModelDTO(
                 unidad.getPiso(),

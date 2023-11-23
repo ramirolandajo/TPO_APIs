@@ -33,7 +33,7 @@ export default function PaperUsuariosAdmin() {
   return (
     <Paper sx={{ my: 4, boxShadow: 10, borderRadius: 2, pt: 2 }}>
           <React.Fragment>
-            <h2 className='titulo-reclamos'>Usuarios</h2>
+            <h2 className='titulo'>Usuarios</h2>
             <Table size="small">
               <TableHead>
                 <TableRow>

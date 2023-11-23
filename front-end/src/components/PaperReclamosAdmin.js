@@ -59,7 +59,7 @@ export default function PaperReclamosAdmin() {
     return (
     <Paper sx={{ my: 4, boxShadow: 10, borderRadius: 2, pt: 2 }}>
           <React.Fragment>
-            <h2 className='titulo-reclamos'>Reclamos</h2>
+            <h2 className='titulo'>Reclamos</h2>
             <Table size="small">
               <TableHead>
                 <TableRow>

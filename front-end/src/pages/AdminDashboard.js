@@ -9,6 +9,8 @@ import Footer from '../components/Footer';
 import PaperEdificiosAdmin from '../components/PaperEdificiosAdmin';
 import PaperReclamosAdmin from '../components/PaperReclamosAdmin';
 import PaperUsuariosAdmin from '../components/PaperUsuariosAdmin';
+import PaperEspaciosComunes from '../components/PaperEspaciosComunes';
+import PaperUnidades from '../components/PaperUnidades';
 
 export default function AdminDashboard() {
   return (
@@ -24,6 +26,8 @@ export default function AdminDashboard() {
         <PaperEdificiosAdmin/>
         <PaperReclamosAdmin/>
         <PaperUsuariosAdmin/>
+        <PaperEspaciosComunes/>
+        <PaperUnidades/>
       </div>
       <Footer title={"Pisos Picados"} pos={'sticky'}/>
     </div>
